@@ -1,0 +1,32 @@
+
+Commit to Git:
+1. cd .. - Gets you to the empress of the isles main folder
+2. git add . - Adds everything to the stage
+3. git commit -m "Whatever message you want but you need to write smth"
+4. git push
+
+Compile to html:
+tweego -o eoti.html src
+
+Import file from git:
+git show [Commit ref]:[File path on git] >[New local file name]
+
+Restore current version:
+git restore [file path]
+
+List of Commits:
+git log --oneline
+
+Créer + commuter sur une nouvelle branche
+git checkout -b [nom de la branche]
+
+Commuter sur une branche existante (ce qui importe les fichiers nvll branches en local)
+git checkout [nom de la branche]
+
+Rebaser la branche sur le main:
+1) aller sur main et pull
+2) git rebase main [nom de la branche]
+3) git checkout main
+4) git merge [nom de la branche]
+5) git push
+

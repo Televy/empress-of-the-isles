@@ -1,0 +1,26 @@
+::Basic Game Info [script]
+
+console.log("Basic game info successfully accessed.");
+
+/* Resources */
+let money = 0;
+let energy = 0;
+let mf = 20;
+let vote = 0;
+let dialog = "";
+
+/* Turn System */
+let turn = 1;
+let year = 1835;
+let monthCount = 0;
+let monthArray = ['Clans', 'Songs', 'Earth', 'Harvest', 'Nets', 'Rain', 'Wind', 'Darkness', 'High Cold', 'Ice', 'Hearths', 'Seeds', 'Timber'];
+let month = monthArray[monthCount];
+let day = 1;
+
+/* Popularity */
+let commonerPop = 50;
+let noblePop = 50;
+let criminalPop = 50;
+let abbeyPop = 50;
+let watchPop = 50;
+let popMessage = ["", "", "", "", ""];

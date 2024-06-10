@@ -1,0 +1,73 @@
+::Laws [script]
+console.log("Laws successfully accessed.");
+
+let currentTier = 1;
+let laws = [
+    {
+        "name": "Last Rites",
+        "desc": "Allows Overseers to perform last rites on plague victims. Increases Abbey popularity.",
+        "tier": 1,
+        "price": 75,
+        "isVoted": false
+    }, 
+    {
+        "name": "Understaffing",
+        "desc": "Reduces the number of Watch squad to enforce a curfew or a lockdown, but reduces Watch popularity when in effect",
+        "tier": 1,
+        "price": 200,
+        "isVoted": false
+    },
+    {
+        "name": "Chapel Fund",
+        "desc": "Funds the construction of new chapels. Increases Abbey popularity.",
+        "tier": 2,
+        "price": 150,
+        "isVoted": false
+    },
+    {
+        "name": "Armory Funding",
+        "desc": "Increases the funds allocated to the Watch's weaponry. Increases Watch popularity.",
+        "tier": 2,
+        "price": 150,
+        "isVoted": false
+    },
+    {
+        "name": "Warfare Overseers",
+        "desc": "Allows for the training of Warfare Overseers. Increases Abbey popularity.",
+        "tier": 3,
+        "price": 250,
+        "isVoted": false
+    },
+    {
+        "name": "Rehabilitation Centers",
+        "desc": "Funds new rehabilitation centers for Watch and Army veterans. Increases Watch popularity.",
+        "tier": 3,
+        "price": 200,
+        "isVoted": false
+    },
+    {
+        "name": "Raids on Heretics",
+        "desc": "Allows raids on people suspected of heresy. Increases Abbey popularity.",
+        "tier": 4,
+        "price": 300,
+        "isVoted": false
+    },
+    {
+        "name": "Drafting",
+        "desc": "Start mandatory drafting to bolster the ranks of the City Watch. Increases your troops, but lowers Commoners popularity.",
+        "tier": 4,
+        "price": 225,
+        "isVoted": false
+    },
+    {
+        "name": "Whale Oil Technologies",
+        "desc": "Double down on whale oil-based defensive infrastructures. Increases Watch popularity.",
+        "tier": 4,
+        "price": 100,
+        "isVoted": false
+    }
+// <<set $lawName to ['Rat exterminators','Custom processing','Curfews','Textile negociation','Lockdown','District termination','Farming contracts','Lower food quality standards','Deregulate ship safety standards','Raise standards in food conservation', 'Lengthen work hours in slaughterhouses', 'Cut control on medicine','Tax basic resources','Impose whaling quotas','Make medicine patents public','Tax on luxury resources','Rationing','Increase number of medicine sudents','Seize plague victim corpses','Increase work hours for natural philosophers','Government planification','Experimentation on weepers','Seize private laboratories','Human experimentation','Put research under military supervision','Underground city planning','Public transportation act','Emergency health fund','Wrenhaven development plan','Southern bank development plan','Warehouse subsidies','Big Pharma Lobbying','Chop shop']>>
+// <<set $lawDesc to ["Unlock the option to pay exterminators to control the rat population.","Enacts custom processing on trade routes. Lowers contamination between districts, but caps the trade to 100 units per route.","Allows you to impose curfews on a district. Reduces plague propagation, but makes the local population unhappy.", "Negociate with textile company to get a discount on mask productions. Halves the price of masks.", "Allows you to put a district under lockdown. Reduces plague propagation a lot, but makes the local population very unhappy.","Allows you to wall off a district permanently, leaving its population to die. This district won't infect any other district and rats won't travel from there, but doing this will scandalize your citizens.","Tie new contracts with farmers from the surrounding countryside. Increases food production.","Lower standards means more food approved for consumption. Increases food production.","Removes some regulations on the riskiest whaling techniques, allowing high-risk, high-reward expeditions. Increases energy production.","Imposes new regulations on food conservation techniques, resulting in less waste. Increases food production.","Allows employers to impose longer hours in the butchering industry. Increases energy production.","Cuts the amount of control elixir has to go through before commercialisation. Increases elixir production.","Tax basic resources such as food, whale oil or textile. Increases money income, but lowers Commoners popularity.","Imposes quotas on whaling to avoid depleting the whale population. Increases whale oil production.", "Make medicine patents public domain, allowing anyone to produce them. Increases elixir production.","Tax luxury resources such as alcohol, fur or jewelry. Increases money income, but lowers Nobility popularity.","Allows you to impose rationing on a district. Halves the food consumption, but lowers your popularity with the local population.","Forces the Academy of Natural Philosophy to accept more students. Increases research speed.","Organize the seizing of plague victim bodies for research. Increases research speed.","Run your researchers ragged. Increases research speed.","In light of the emergency situation, all research is now controlled by the government. Surprisingly, this increases your research speed.","Allows the capture of weepers to be used as test subject. Increases research speed.","Nationalize private laboratories, including equipment and human resources. Increases research speed.","Prisoners from Coldridge will be used as test subject. Increases research speed.","Military regimen can only improve their catastrophical organization. Increases research speed.","Lowers the cost of sewers.","Lowers the cost of railways","Lowers the cost of hospital and quarantine houses.","Lowers the cost of docks.","Lowers the cost of infrastructures in Commoners district.","Lowers the cost of warehouses.","Lowers the cost of elixir factories.","Lowers the cost of slaughterhouses."]>>
+// <<set $lawTier to [1,2,2,3,3,4,1,2,2,3,3,3,3,4,4,4,4,1,2,2,3,3,4,4,4,1,2,2,3,3,4,4,4]>>
+// <<set $lawPrice to [100,150,175,200,275,250,150,150,100,250,100,200,150,300,300,250,275,75,100,75,200,150,300,200,250,100,150,200,175,300,250,300,275]>>
+]

@@ -1,0 +1,215 @@
+:: Script [script]
+// Check that we are initializing script
+console.log("We're in the script!");
+
+(function() {
+	window.addEventListener("load", init);
+  import("/script.js");
+
+	function init() {
+		id("ui-bar").remove();
+    let mapAreas = qsa("map area");
+    for (let i = 0; i < mapAreas.length; i++) {
+      let area = mapAreas[i];
+      let areaDistrict = area.getAttribute("title");
+      area.addEventListener("click", () => {
+        area.classList.add("hovered")
+        openDistrictMenu(areaDistrict);
+      });
+    }
+	}
+
+  /**
+   * Open District Menu: Creates and slides in a 
+   */
+  function openDistrictMenu(districtName) {
+    console.log(districtName);
+    let text = gen("p");
+    text.textContent = "This is some text! You clicked on this district: " + districtName;
+    id("right-menu").appendChild(text);
+  }
+
+  // Updating Info Per Turn
+  function update() {
+    // Update District Info
+    for (let i = 0; i < districts.length; i++) {
+      let currentDistrict = districts[i];
+      ratUpdate(currentDistrict);
+      infectionUpdate(currentDistrict);
+    }
+  }
+
+  // Plague Dynamics -------------------------------------------------------------
+
+  /** 
+  * Rat Population Updating: Updates rat population of a district.
+  * @param {JSON} district - District data
+  */
+  function ratUpdate(district) {
+    let current = district.plague.rats;
+    let max = district.initPop;
+    let neighbors = ((district.adjNeighbors.length) * 5) + district.bridgeNeighbors.length;
+    let wallOff = district.antiPlague.wallOff;
+    let hunt = district.antiPlague.actualHunt;
+
+    // 0.02% of rats move through each border
+    let inter = wallOff * Math.floor(neighbors * current * 0.0002);
+
+    // Base reproduction rate is 10%
+    if (max != 0) { // if the district isn't Holger, Wyrmwood, or Kingsparrow
+      current = Math.floor(current + (1 - current/(max * 1.5)) * (current * (0.1) + inter));
+    } else {
+      current = 0;
+    }
+
+    // Account for rat hunting
+    current = current - Math.floor(hunt * (10 + current/10));
+    if (current < 0) {
+      current = 0;
+    }
+
+    district.plague.rats = current;
+  }
+
+  /** 
+    * Infection Updating: Updates the current infection population for a district.
+    * @param {JSON} district - District data
+    */
+  function infectionUpdate(district) {
+    let current = district.plague.infection; // POPULATION of infected
+    let totalPop = district.population;
+    let rat = district.plague.rats;
+    let history = district.plague.infectionHistory;
+    let inter;
+    let humanTrav = 0.0002;
+    let adjNeighbors = district.adjNeighbors;
+    let bridgeNeighbors = district.bridgeNeighbors;
+    let infectionRate = infectionRate(district);
+    let ratHumanInfection = ratInfectionRate(district);
+    let lockdown = district.antiPlague.lockdown;
+    let wallOff = district.antiPlague.wallOff;
+
+    // Inter-district Contamination
+    if (lockdown == 2) {
+      inter = 0;
+    } else {
+      for (let i = 0; i < adjNeighbors.length; i++) {
+        let currentDistrict = retrieveDistrict(adjNeighbors[i]);
+        let adjLock = currentDistrict.antiPlague.lockdown;
+        let adjInf = currentDistrict.plague.infection;
+        if (adjLock == 0) {
+          inter += wallOff * Math.floor(5 * adjInf * humanTrav);
+        } else if (adjLock == 1) {
+          inter += wallOff * Math.floor(5 * adjInf * humanTrav/2);
+        }
+      }
+      if (bridgeNeighbors.length > 0) {
+        for (let i = 0; i < adjNeighbors.length; i++) {
+          let currentDistrict = retrieveDistrict(bridgeNeighbors[i]);
+          let bridgeLock = currentDistrict.antiPlague.lockdown;
+          let bridgeInf = currentDistrict.plague.infection;
+          if (bridgeLock == 0) {
+            inter += wallOff * Math.floor(bridgeInf * humanTrav);
+          } else if (bridgeLock == 1) {
+            inter += wallOff * Math.floor(bridgeInf * humanTrav/2);
+          }
+        }
+      }
+      if (lockdown == 1) {
+        inter = inter/2;
+      }
+    }
+
+    // Death
+    if (turn <= 7) { // Before People Die
+      let update = Math.floor((totalPop - current)/totalPop * (rat * ratHumanInfection + (current + inter) * infectionRate));
+      current += update;
+      history.push(update);
+    } else { // People Start Dying
+      let dead = district.infectionHistory.shift();
+      district.population -= dead; // Kill the dead
+      totalPop = district.population;
+      current -= dead; // New total infected
+      if (totalPop != 0) {
+        // New infected this turn
+        let update = Math.floor(((totalPop - current)/totalPop) * (rat * ratHumanInfection + (current + inter) * infectionRate))
+        // If the district gets fully contaminated this turn
+        if (update > (total - current)) {
+          update = total - current;
+          current = total;
+        } else {
+          current += update;
+        }
+        history.push(update);
+      } else {
+        history.push(0);
+      }
+    }
+
+    district.plague.infection = current; // Set current district's infection population
+  }
+
+  /** 
+  * Infection Rate: Calculates base infection rate.
+  * @param {JSON} district - District data
+  */
+  function infectionRate(district) {
+    let rate;
+    let mask = district.antiPlague.actualMaskDist;
+    let elixir = district.antiPlague.actualElDist;
+    let lockdown = district.antiPlague.lockdown;
+    let hospital = district.infrastructures.hospital;
+    let quarantine = district.infrastructures.quarantine;
+
+    rate = 0.2 - elixir * 0.02 - mask * 0.03 - lockdown * 0.07 - hospital * 0.03 - quarantine * 0.03;
+    if (rate < 0) {
+      rate = 0;
+    }
+    
+    return rate;
+  }
+
+  /**
+    * Rat Human Infection Rate: Calculates rat-human infection rate.
+    * @param {JSON} district - District data
+    */
+  function ratInfectionRate(district) {
+    let rate;
+    let elixir = district.antiPlague.actualElDist;
+    let lockdown = district.antiPlague.lockdown;
+    let sewer = district.infrastructures.sewer;
+
+    rate = 0.005 - elixir * 0.002 - lockdown * 0.002 - sewer * 0.001;
+    if (rate < 0) {
+      rate = 0;
+    }
+
+    return rate;
+  }
+
+  // Helper Functions ------------------------------------------------------------
+  function id(id) {
+    return document.getElementById(id);
+  }
+    
+  function qs(selector) {
+    return document.querySelector(selector);
+  }
+
+  function qsa(selector) {
+    return document.querySelectorAll(selector);
+  }
+
+  function gen(tagName) {
+    return document.createElement(tagName);
+  }
+
+  function retrieveDistrict(districtName) {
+    for (let i = 0; i < districts.length; i++) {
+      if (districts[i].name == districtName) {
+        return districts[i];
+      }
+    }
+    return "That is not a valid district name.";
+  }
+}) ();

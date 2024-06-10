@@ -1,0 +1,2698 @@
+:: StoryTitle
+Hiaen version (latest)
+
+
+:: StoryData
+{
+	"ifid": "261BA4E9-8761-4879-8D9F-D2538FDEA3EA",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "Main Menu",
+	"tag-colors": {
+		"faction-menu": "blue",
+		"main-menu": "blue",
+		"map": "yellow",
+		"menu": "none"
+	},
+	"zoom": 1
+}
+
+
+:: Story Stylesheet [stylesheet]
+/* Font Imports ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Serif&display=swap');
+
+/* Default Styling ============================================= */
+body {
+    background-color: #151515;
+    color: white;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+h1, h2 {
+	font-family: 'Noto Serif', serif;
+}
+
+
+/* Collapsible Text Styling ==================================== */
+
+.hidden {
+	display: none;
+}
+
+/* Start Menu Styling ========================================== */
+#menu-content {
+	color: navy;
+    position: fixed;
+    top: 20px;
+}
+
+#menu-bg  {
+    position: fixed;
+  	object-fit: cover;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+.passage.main-menu a {
+	color: navy;
+}
+
+.passage.main-menu a:hover {
+	color: green;
+}
+
+/* Link Styling ================================================ */
+a {
+	color: gold;
+}
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Tooltip Text Styling ======================================== */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+ 
+  /* Positioning & size of the tooltip */
+  position: absolute;
+  z-index: 100;
+  width: 450px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -225px; /*half of width*/
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+  
+/* Top Bar Styling ============================================= */
+#topbar {
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background-color: #003763;
+	border-bottom: 3px solid #9c863c;
+	box-shadow: 0 0 10px 0 #333;
+	z-index: 100;
+}
+
+#topresources img {
+	max-width: 5%;
+  	max-height: auto;
+}
+
+#topresources {
+    margin-left: 1em; 
+  	color: #fffade; 
+}
+
+#topturns {
+  	text-align: right;
+    margin-right: 1em;
+  	color: #fffade; 
+}
+
+#ui-bar.stowed~#story {
+	margin-left: 4.5em;
+}
+
+@media screen and (max-width: 1136px) {
+	#topblock {
+		margin-left: 19em;
+		margin-right: 1.5em;
+	}
+	#ui-bar.stowed~#story #topblock {
+		margin-left: 3.5em;
+	}
+}
+@media screen and (max-width: 768px) {
+	#topblock {
+		margin-left: 3.5em;
+	}
+}
+
+/* Bottom Bar Styling ========================================== */
+#botbar {
+  	text-align: center;
+  	color: #fffade;
+
+	position: fixed;
+ 	left: 25%;
+	bottom: 0;
+	width: 50%;
+	background-color: #003763;
+	border-top: 1px solid #444;
+	box-shadow: 0 0 10px 0 #333;
+	z-index: 100;
+}
+
+/* Right UI Bar Styling ======================================== */
+#right-ui-bar {
+	background-color: #003763;
+	border-right: 1px solid #444;
+	text-align: center;
+  
+  	/* Layout and Positioning */
+  	position: fixed;
+	z-index: 50;
+	bottom: 5px;
+	right: 0;
+	width: 30%;
+	height: 93%; /* so menu doesn't clip over top bar info*/
+	margin: 0;
+	padding: 0;
+	-webkit-transition: right .2s ease-in;
+	-o-transition: right .2s ease-in;
+	transition: right .2s ease-in;
+}
+#right-ui-bar-toggle {
+	font-size: 1.2em;
+	line-height: inherit;
+	color: #eee;
+	background-color: transparent;
+	border: 1px solid #444;
+}
+#right-ui-bar-toggle:before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+
+#right-ui-bar-tray {
+	position: absolute;
+	top: .2em;
+	left: 0;
+	right: 0;
+}
+#right-ui-bar-toggle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: none;
+	padding: .3em .45em .25em;
+	-webkit-user-select: none;
+}
+#right-ui-bar-toggle:before {
+	content: "\e822"; /*Code for arrow icon in fontawesome*/
+}
+#right-ui-bar-body {
+	height: 90%;
+	height: calc(100% - 2.5em);
+	margin: 2.5em 0;
+	padding: 0 1.5em;
+  	line-height: 1.5;
+	overflow: auto;
+}
+
+#story {
+	margin-right: 20em;
+}
+
+/* Stowing of the Right UI Bar. */
+#right-ui-bar.stowed {
+	right: -30%; 
+}
+
+#right-ui-bar.stowed~#story {
+	margin-right: 4.5em;
+}
+
+
+/* Trading Menu Styling ======================================== */
+#trade-ui-bar {
+	background-color: #003763;
+	border-right: 1px solid #444;
+	text-align: center;
+  
+  	/* Layout and Positioning */
+  	position: fixed;
+	z-index: 60;
+	bottom: 5px;
+	left: 0;
+	width: 30%;
+	height: 93%;
+	margin: 0;
+	padding: 0;
+	-webkit-transition: left .2s ease-in;
+	-o-transition: left .2s ease-in;
+	transition: left .2s ease-in;
+}
+
+#trade-ui-bar-toggle {
+	font-size: 1.2em;
+	line-height: inherit;
+	color: #eee;
+	background-color: transparent;
+	border: 1px solid #444;
+}
+
+#trade-ui-bar-toggle:before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+
+#trade-ui-bar-tray {
+	position: absolute;
+	top: .2em;
+	left: 0;
+	right: 0;
+}
+#trade-ui-bar-toggle {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-right: none;
+	padding: .3em .45em .25em;
+	-webkit-user-select: none;
+}
+
+#trade-ui-bar-toggle:before {
+	content: "\e821"; /*Code for arrow icon in fontawesome*/
+}
+
+#trade-ui-bar-body {
+	height: 90%;
+	height: calc(100% - 2.5em);
+	margin: 2.5em 0;
+	padding: 0 1.5em;
+  	line-height: 1.5;
+	overflow: auto;
+}
+
+#story {
+	margin-right: 20em;
+}
+
+/* Stowing of the Right UI Bar. */
+#trade-ui-bar.stowed {
+	left: -30%; 
+}
+
+#trade-ui-bar.stowed~#story {
+	margin-left: 4.5em;
+}
+
+/* Factions Menu Styling ======================================= */
+
+body.faction-menu {
+	background-color: #003763;
+}
+
+.fcolumn {
+	float: left;
+  	width: 20%;
+}
+
+.frow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+progress{  
+  	background-color: white; 
+}  
+
+progress[value] {
+	color: blue;
+}
+
+/* Built-In Twine Styling ====================================== */
+
+/*transitions*/
+.no-transition.passage-in {
+	opacity: 1;
+}
+
+/*passage width*/
+#passages {
+	max-width: 100%; /* default is 54em */
+}
+
+/*UI bar*/
+#ui-bar{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20em;
+  height: 93%; /* so menu doesn't clip over top bar info*/
+  margin: 0;
+  padding: 0;
+}
+#ui-bar.stowed{left: -18em;}
+#ui-bar-history{display: none;}
+#title{display: none;}
+
+/*! <<numberpool>> macro set for SugarCube v2 */
+div[id|="numberinput-body"] {
+	display: inline-block;
+}
+div[id|="numberinput-body"] input {
+	min-width: 3em;
+	width: 3em;
+	text-align: center;
+}
+div[id|="numberinput-body"] button {
+	font-family: "tme-fa-icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: normal;
+	speak: none;
+	padding: 0.4em 0.6em;
+}
+div[id|="numberinput-body"] button[id|="numberinput-minus"] {
+	margin-right: 0.4em;
+}
+div[id|="numberinput-body"] button[id|="numberinput-plus"] {
+	margin-left: 0.4em;
+}
+
+div[id|="numberslider-body"] {
+	display: inline-block;
+}
+div[id|="numberslider-body"] span {
+	display: inline-block;
+	/*font-size: 1.25em;*/
+	margin-left: 0.25em;
+	min-width: 3em;
+	text-align: center;
+	vertical-align: middle;
+}
+div[id|="numberslider-body"] input {
+	-webkit-appearance: none;
+	cursor: pointer;
+	height: 1.25em;
+	min-width: 20em;
+	vertical-align: middle;
+}
+div[id|="numberslider-body"] input:focus {
+	outline: none;
+}
+div[id|="numberslider-body"] input::-webkit-slider-runnable-track {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+	cursor: pointer;
+	height: 10px;
+	width: 100%;
+}
+div[id|="numberslider-body"] input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background: #35a;
+	border: 1px solid #57c;
+	border-radius: 0;
+	cursor: pointer;
+	height: 18px;
+	margin-top: -5px;
+	width: 33px;
+}
+div[id|="numberslider-body"] input:focus::-webkit-slider-runnable-track {
+	background: #222;
+}
+div[id|="numberslider-body"] input::-moz-range-track {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+	cursor: pointer;
+	height: 10px;
+	width: 100%;
+}
+div[id|="numberslider-body"] input::-moz-range-thumb {
+	background: #35a;
+	border: 1px solid #57c;
+	border-radius: 0;
+	cursor: pointer;
+	height: 18px;
+	width: 33px;
+}
+div[id|="numberslider-body"] input::-ms-track {
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+	cursor: pointer;
+	height: 10px;
+	width: 99%; /* fallback for MS browsers without support for calc() */
+	width: calc(100% - 1px);
+}
+div[id|="numberslider-body"] input::-ms-fill-lower {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+}
+div[id|="numberslider-body"] input::-ms-fill-upper {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+}
+div[id|="numberslider-body"] input::-ms-thumb {
+	background: #35a;
+	border: 1px solid #57c;
+	border-radius: 0;
+	cursor: pointer;
+	height: 16px;
+	width: 33px;
+}
+
+
+:: Story JavaScript [script]
+// UI Bar 
+UIBar.destroy();
+UIBar.stow();
+
+// BASIC FUNCTIONS -----------------------------------------
+
+  /* sum function */
+    setup.sum = function (arr) {
+        var s = 0;
+        for (var i = 0; i < arr.length; i++) {
+            s += arr[i];
+        }
+        return s;
+    }
+
+  /* sum except one function */
+    setup.sumExcept = function (arr, j) {
+        var s = 0;
+        for (var i = 0; i < arr.length; i++) {
+          if (i!=j){
+            s += arr[i];
+          }
+        }
+        return s;
+    }
+
+  /* array sum function */
+    setup.arraySum= function (A, B) {
+      var res=[]
+      for (var i = 0; i < A.length; i++) {
+        res.push(A[i]+B[i])
+      }
+      return res;
+    }
+
+
+  /* array substract function */
+    setup.arraySub= function (A, B) {
+      var res=[]
+      for (var i = 0; i < A.length; i++) {
+        res.push(A[i]-B[i])
+      }
+      return res;
+    }
+
+  /* array multiply function */
+    setup.arrayMult= function (A, B) {
+      var res=[]
+      for (var i = 0; i < A.length; i++) {
+        res.push(A[i]*B[i])
+      }
+      return res;
+    }
+
+  /* shuffle array*/
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    return(arr);
+    }
+
+// PLAGUE DYNAMICS -----------------------------------------
+
+    /**
+     * Rat plague starting point
+     * Description: Generates a district number between 
+     * Slaughterhouse, Distillery, Downmarket, & Old Port
+     * @return {number} # that corresponds to a district
+     */
+    setup.ratInit= function () {
+      let gen = Math.floor(Math.random() * 4 + 9);
+      if (gen != 12) {
+        return gen;
+      } else {
+        return 7;
+      }
+    }
+
+  // Rat population
+    setup.ratUpdate= function () {
+      var current=[...State.variables.districtRat];
+      var max=State.variables.districtPopInit
+      var inter=0;
+      var neighbor=State.variables.districtNeighbor;
+      var wallOff=State.variables.wallOff;
+      var hunt=State.variables.actualHunt;
+
+      for (var i = 0; i < current.length; i++) {
+
+        /*rat travel*/
+        inter=0;    
+        for (var j = 0; j < current.length; j++) {
+          inter+=wallOff[j]*Math.floor(neighbor[i][j]*State.variables.districtRat[j]*0.0002);/*0.02% of rats move through each border*/
+        }
+
+        if (max[i]!=0){
+          current[i]=Math.floor(current[i]+(1-current[i]/(max[i]*1.5))*(current[i]*(0.1)+inter));/* base reproduction rate is 10%*/
+        }
+        else{
+            current[i]=0; /*just in case there's an empty district*/
+        }
+
+        current[i]=current[i]-Math.floor(hunt[i]*(10+current[i]/10));
+        if (current[i]<0){
+          current[i]=0;
+        }
+
+      }
+      return current;
+    }
+
+  /**
+   * Infection Rate
+   * @returns {Array.number} Infection rate per district
+   */
+    setup.infRate= function () {
+      // All Array variables
+      let rate = [];
+      let mask = State.variables.actualMaskD;
+      let elDist = State.variables.actualElD;
+      let lockdown = State.variables.lockdown;
+      let hosp = State.variables.hospital;
+      let quar = State.variables.quarantine;
+
+      for (let i = 0; i < elDist.length; i++){
+        rate[i] = 0.2 - elDist[i] * 0.02 - mask[i] * 0.03 - 
+          lockdown[i] * 0.07 - hosp[i] * 0.03 - 
+          quar[i] * 0.03;
+        if (rate[i]<0){
+          rate[i]=0;
+        }
+      }
+
+      return rate;
+    }
+
+  /**
+   * Rat Human Infection Rate
+   * @returns {Array.number} Rat-human infection rate per
+   * district
+   */
+    setup.ratInfRate= function () {
+      let rate = [];
+      let elDist = State.variables.actualElD;
+      let lockdown = State.variables.lockdown;
+      let sewer = State.variables.sewer;
+
+      for (let i = 0; i < elDist.length; i++){
+        rate[i] = 0.005 - elDist[i] * 0.002 - lockdown[i] * 
+          0.002 - sewer[i] * 0.001;
+        if (rate[i]<0){
+          rate[i]=0;
+        }
+      }
+
+      return rate;
+    }
+
+  /* infection */
+    setup.infUpdate= function () {
+      var current=[...State.variables.districtInf];
+      var total=[];
+      var rat=[...State.variables.districtRat];
+      var update=0;
+      var dead =0;
+      var inter=0;
+      var humanTrav=0.0002;
+      var neighbor=State.variables.districtNeighbor;
+      var infRate=setup.infRate();
+      var ratHumInf=setup.ratInfRate();
+      var lockdown=State.variables.lockdown;
+      var wallOff=State.variables.wallOff;
+
+      for (var i = 0; i < current.length; i++) {
+
+        /*inter district contamination*/
+        inter=0;
+        for (var j = 0; j < current.length; j++) {
+          if (lockdown[j]==0){
+            inter+=wallOff[j]*Math.floor(neighbor[i][j]*State.variables.districtInf[j]*humanTrav);
+          }
+          else if (lockdown[j]==1){
+            inter+=wallOff[j]*Math.floor(neighbor[i][j]*State.variables.districtInf[j]*humanTrav/2);
+          }
+        }
+        if (lockdown[i]==1){
+          inter=inter/2;    
+        }
+        else if(lockdown[i]==2){
+          inter=0;
+        }
+
+        /*when people have started dying*/
+        if (State.variables.turn>7){
+
+            dead=State.variables.infHistory.shift();
+          State.variables.deadThisTurn[i]=dead;
+            State.variables.districtPop[i]-=dead; /*kill the dead*/
+            total=State.variables.districtPop;
+            current[i]=current[i]-dead; /*new total infected*/
+
+            /*if the district isn't empty*/
+            if (total[i]!=0){
+                update=Math.floor( ((total[i]-current[i]) /total[i])*(rat[i]*ratHumInf[i] + (current[i]+inter)*(infRate[i])) ); /*new infected this turn*/
+
+                /*if it's enough to contaminate the entire district*/
+                if (update>total[i]-current[i]){
+                    update=total[i]-current[i]; /*adjust the new number of infected*/
+                    current[i]=total[i];/*the entire district is infected*/
+                }
+                else{
+                    current[i]=current[i]+update;/*add the new infected*/
+                }
+                State.variables.infHistory.push(update);/*log the new infected so they can die later*/
+            }
+            /*if district empty*/
+            else{
+                State.variables.infHistory.push(0);
+            }
+        }
+
+        /*before people die*/
+        else{
+            /*if not empty district*/
+            if (total[i]!=0){
+
+                total=State.variables.districtPop;
+
+                update=Math.floor( (total[i]-current[i])/total[i]*(rat[i]*ratHumInf[i] + (current[i]+inter)*(infRate[i])) ); /*new infected*/
+                current[i]=current[i]+update; /*add the infected*/
+
+                State.variables.infHistory.push(update);/*log the infected*/
+
+            }
+          else{
+            State.variables.infHistory.push(0);        
+          }
+        }
+      }
+      return current;
+    }
+
+// RESOURCE UPDATING
+
+// MONEY
+
+  // Money update
+    setup.moneyUpdate=function(){
+      var lockdown=State.variables.lockdown;
+      var money=State.variables.money;
+      var modif=State.variables.deathModif;
+      //this turn's gains
+      for (var i = 0; i < lockdown.length; i++) {
+        if (lockdown[i]==2){
+            money+=Math.floor(modif[i]*State.variables.districtMoney[i]/2);
+        }
+        else{
+          money+=Math.floor(modif[i]*State.variables.districtMoney[i]);
+        }
+      }
+      money-=setup.huntCost();
+      money-=setup.maskCost();
+      State.variables.money=money;
+    }
+	
+	/*extract money produced*/
+    setup.moneyProd=function(district){
+      var lockdown=State.variables.lockdown;
+      var total=0;
+      var modif=State.variables.deathModif;
+      //this turn's gains
+      if (lockdown[district]==2){
+            total+=Math.floor(modif[district]*State.variables.districtMoney[district]/2);
+        }
+        else{
+          total+=Math.floor(modif[district]*State.variables.districtMoney[district]);
+        }
+      return(total);
+    }
+
+
+  /*rat hunt cost function*/
+    setup.huntCost=function(){
+      var money=State.variables.money;
+
+      var spend=0;
+      var revTable1=[];
+      var revTable2=[];
+      var revTable3=[];
+      var keep=0;
+      var pop=State.variables.districtPop;
+      var hunt=[...State.variables.ratHunt];
+      var actual=State.variables.actualHunt;
+      var alert=""
+      var name=State.variables.districtName;
+
+      var huntCost=10;
+
+      //make a reverse table of which districts need masks
+      for (var i = 0; i < hunt.length; i++) {
+        if (hunt[i]==1){
+          revTable1.push(i);
+        }
+        else if (hunt[i]==2){
+          revTable2.push(i);
+        }
+        else if (hunt[i]==3){
+          revTable3.push(i);
+        }
+      }
+
+      actual=[...hunt]
+
+      revTable1=shuffleArray(revTable1);
+      revTable2=shuffleArray(revTable2);
+      revTable3=shuffleArray(revTable3);//randomize the reverse table
+      spend=0;
+      var i=0;
+      var l=revTable1.length;
+      //while there's still money to spend, start hunt
+      while (spend+huntCost<=money && i<l){
+        spend+=huntCost;
+        revTable1.pop();
+        i++;
+      }
+      var i=0;
+      var l=revTable2.length;
+      while (spend+huntCost+15<=money && i<l){
+        spend+=huntCost+15;
+        revTable2.pop();
+        i++;
+      }
+      var i=0;
+      var l=revTable3.length;
+      while (spend+huntCost+25<=money && i<l){
+        spend+=huntCost+25;
+        revTable3.pop();
+        i++;
+      }
+
+      //switch off the hunts for each district that wasn't served
+      for (var i = 0; i < revTable1.length; i++) {
+        actual[revTable1[i]]=0;
+        alert+='<br>'+name[revTable1[i]]+'</br>'
+      }
+      for (var i = 0; i < revTable2.length; i++) {
+        actual[revTable2[i]]=0;
+        alert+='<br>'+name[revTable2[i]]+'</br>'
+      }
+      for (var i = 0; i < revTable3.length; i++) {
+        actual[revTable3[i]]=0;
+        alert+='<br>'+name[revTable3[i]]+'</br>'
+      }
+
+      //send a popup
+      if (alert!=""){
+        State.variables.dialog+=("The following districts didn't get rat suppression:"+alert);
+      }
+      State.variables.actualHunt=actual;
+      return(spend);
+    }
+
+  /*mask cost fucntion*/
+    setup.maskCost=function(){
+      var money=State.variables.money;
+
+      var spend=0;
+      var revTable=[];
+      var keep=0;
+      var pop=State.variables.districtPop;
+      var mask=[...State.variables.districtMaskDist];
+      var actual=State.variables.actualMaskD;
+      var alert=""
+      var name=State.variables.districtName;
+
+      var maskCost=[];
+      for (var i = 0; i < mask.length; i++) {
+        maskCost.push(Math.ceil(pop[i]/100000)+4); //mask spending depending on population
+      }
+
+      //make a reverse table of which districts need masks
+      for (var i = 0; i < mask.length; i++) {
+        if (mask[i]==1){
+          revTable.push(i);
+        }
+      }
+
+      actual=[...mask]
+
+      revTable.sort(function(a, b){return pop[b] - pop[a]}); //order the reverse table by descending population
+      spend=0;
+      var i=0;
+      var l=revTable.length;
+      //while there's still money to spend, send masks
+      while (spend+maskCost[i]<=money && i<l){
+        spend+=maskCost[revTable.pop()];
+        i++;
+      }
+
+      //switch off the mask distribution for each district that wasn't served
+      for (var i = 0; i < revTable.length; i++) {
+        actual[revTable[i]]=1-actual[revTable[i]];
+        alert+='<br>'+name[revTable[i]]+'</br>'
+      }
+
+      //send a popup
+      if (revTable.length!=0){
+        State.variables.dialog+=("The following districts couldn't get masks distributed:"+alert);
+      }
+      State.variables.actualMaskD=actual;
+      return(spend);
+    }
+
+/*ELIXIR*/
+
+  /* elixir update */
+    setup.elixirUpdate=function(){
+      var lockdown=State.variables.lockdown;
+      var elixir=State.variables.districtElixirStock;
+      var trade=State.variables.elixirRoutes;
+      var prod=State.variables.districtElixir;
+      var cancel="";
+      var modif=State.variables.deathModif;
+      
+      //check every trade route
+      for (var i = 0; i < prod.length; i++){
+        if (setup.sum(trade[i])>elixir[i]+prod[i]){
+          trade[i]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+          cancel+='<br>'+name[i]+'</br>';
+        }
+      }
+      if (cancel!=""){
+        State.variables.dialog+=("The following districts had their outgoing trade routes cancelled due to lack of stock:"+cancel);
+      }
+
+      
+      //this turn's gains
+      for (var i = 0; i < lockdown.length; i++) {
+        if (lockdown[i]==2){
+            elixir[i]+=Math.floor(modif[i]*prod[i]/2);
+        }
+        else{
+          elixir[i]+=Math.floor(modif[i]*prod[i]);
+        }
+        for (var j = 0; j < elixir.length; j++){
+          elixir[i]-=trade[i][j];
+          elixir[i]+=trade[j][i];
+        }
+      }
+
+
+      var elDist=State.variables.districtElDist;
+      var pop=State.variables.districtPop;
+      var alert="";
+      var name=State.variables.districtName;
+
+      var elCost=[];
+      for (var i = 0; i < elixir.length; i++) {
+        elCost.push(Math.ceil(elDist[i]*pop[i]/2000)); //elixir spending depending on population
+      }
+
+      var actualEl=State.variables.actualElD;
+      actualEl=[...elDist];
+
+      for (var i = 0; i < elixir.length; i++) {
+        if (elixir[i]>=elCost[i]){ //if there's enough elixir
+          elixir[i]-=elCost[i];//remove the spending
+        }
+        else{
+          actualEl[i]=0;
+          alert+='<br>'+name[i]+'</br>';
+        }
+      }
+
+      for (var i = 0; i < actualEl.length; i++){
+        State.variables.actualElD[i]=actualEl[i];
+      }
+      State.variables.districtElixirStock=elixir;
+
+      if (alert!=""){
+        State.variables.dialog+=("The following districts couldn't get elixir distributed:"+alert);
+      }
+    }
+
+  /*extract elixir consumed*/
+	setup.elCons=function(district){
+      var pop=State.variables.districtPop;
+      var dist=State.variables.districtElDist;
+      return(Math.ceil(dist[district]*pop[district]/2000));
+    }
+
+  /*extract elixir produced*/
+	setup.elProd=function(district){
+      var lockdown=State.variables.lockdown;
+      var prod=State.variables.districtElixir;
+      var total=0;
+      var modif=State.variables.deathModif;
+        if (lockdown[district]==2){
+          total+=Math.floor(modif[district]*prod[district]/2);
+        }
+        else{
+          total+=Math.floor(modif[district]*prod[district]);
+        }
+      return(total);
+    }
+
+  /*extract elixir incoming trade*/
+	setup.elImp=function(district){
+      var trade=State.variables.elixirRoutes;
+      var imp=0;
+      for (var j = 0; j < trade.length; j++){
+        imp+=trade[j][district];
+      }
+      return(imp);
+    }
+
+/*ENERGY*/
+
+  /*energy update*/
+    setup.energyUpdate=function(){
+      var energy=State.variables.energy;
+      var prod=State.variables.districtEnergy;
+      var lockdown=State.variables.lockdown;
+      var modif=State.variables.deathModif;
+      
+      for (var i = 0; i < prod.length; i++){
+        if (lockdown[i]==2){
+          energy+=Math.floor(modif[i]*prod[i]/2);
+        }
+        else{
+          energy+=Math.floor(modif[i]*prod[i]);
+        }
+      }
+      State.variables.energy=energy;
+    }
+
+  /*energy production extract*/
+    setup.energyProd=function(district){
+      var total=0;
+      var prod=State.variables.districtEnergy;
+      var lockdown=State.variables.lockdown;
+      var modif=State.variables.deathModif;
+      
+      if (lockdown[district]==2){
+          total+=Math.floor(modif[district]*prod[district]/2);
+        }
+        else{
+          total+=Math.floor(modif[district]*prod[district]);
+        }
+      
+      return(total);
+    }
+
+/*FOOD*/
+
+  /*extract food outgoing trade*/
+	setup.elExp=function(district){
+      var trade=State.variables.elixirRoutes;
+      var exp=0;
+      for (var j = 0; j < trade.length; j++){
+        exp+=trade[district][j];
+      }
+      return(exp);
+    }
+
+  /*food update*/
+    setup.foodUpdate=function(){
+      var stock=State.variables.districtFoodStock;
+      var prod=State.variables.districtFood;
+      var lockdown=State.variables.lockdown;
+      var trade=State.variables.foodRoutes;
+      var pop=State.variables.districtPop;
+      var name=State.variables.districtName;
+      var alert="";
+      var isStarving=State.variables.isStarving;
+      var cancel="";
+      var modif=State.variables.deathModif;
+      var newStarve=0;
+      
+      //check every trade route
+      for (var i = 0; i < prod.length; i++){
+        if (setup.sum(trade[i])>stock[i]+prod[i]){
+          trade[i]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+          cancel+='<br>'+name[i]+'</br>';
+        }
+      }
+      if (cancel!=""){
+        State.variables.dialog+=("The following districts had their outgoing trade routes cancelled due to lack of stock:"+cancel);
+      }
+
+      for (var i = 0; i < prod.length; i++){
+        if (lockdown[i]==2){
+          stock[i]+=Math.floor(modif[i]*prod[i]/2);
+        }
+        else{
+          stock[i]+=Math.floor(modif[i]*prod[i]);
+        }
+        for (var j = 0; j < prod.length; j++){
+          stock[i]-=trade[i][j];
+          stock[i]+=trade[j][i];
+        }
+        
+        if (stock[i]<Math.ceil(pop[i]/1000)){
+          stock[i]=0;
+          if (isStarving[i]!=1){
+          alert+='<br>'+name[i]+'</br>';
+            isStarving[i]=1;
+            newStarve=1;
+          }
+        }
+        else{
+          stock[i]-=Math.ceil(pop[i]/1000);
+          isStarving[i]=0;
+        }
+      }
+
+      if (newStarve){
+        State.variables.dialog+=("The following districts started starving:"+alert);
+      }
+
+      State.variables.districtFoodStock=stock;
+      State.variables.isStarving=isStarving;
+    }
+
+  /*extract food consumed*/
+	setup.foodCons=function(district){
+      var pop=State.variables.districtPop;
+      return(Math.ceil(pop[district]/1000));
+    }
+
+  /*extract food produced*/
+	setup.foodProd=function(district){
+      var lockdown=State.variables.lockdown;
+      var prod=State.variables.districtFood;
+      var modif=State.variables.deathModif;
+      var total=0;
+        if (lockdown[district]==2){
+          total+=Math.floor(modif[district]*prod[district]/2);
+        }
+        else{
+          total+=Math.floor(modif[district]*prod[district]);
+        }
+      return(total);
+    }
+
+  /*extract food incoming trade*/	
+	setup.foodImp=function(district){
+      var trade=State.variables.foodRoutes;
+      var imp=0;
+      for (var j = 0; j < trade.length; j++){
+        imp+=trade[j][district];
+      }
+      return(imp);
+    }
+
+  /*extract food outgoing trade*/
+	setup.foodExp=function(district){
+      var trade=State.variables.foodRoutes;
+      var exp=0;
+      for (var j = 0; j < trade.length; j++){
+        exp+=trade[district][j];
+      }
+      return(exp);
+    }
+
+  /*extract food outgoing trade*/
+	setup.foodExp=function(district){
+      var trade=State.variables.foodRoutes;
+      var exp=0;
+      for (var j = 0; j < trade.length; j++){
+        exp+=trade[district][j];
+      }
+      return(exp);
+    }
+
+/*GENERAL UPDATES*/
+
+  /*update prod modif*/
+    setup.upDeathMod=function(){
+      var pop=State.variables.districtPop;
+      var popInit=State.variables.districtPopInit;
+      
+      for (var j = 0; j < pop.length; j++){
+        if (pop[j]/popInit[j]>0.5){
+          State.variables.deathModif[j]=Math.ceil(pop[j]/popInit[j]*20)*0.05;
+        }
+        else if (pop[j]/popInit[j]>0.1){
+           State.variables.deathModif[j]=Math.ceil(pop[j]/popInit[j]*20)*0.5/9-0.5/9;
+        }
+        else
+            State.variables.deathModif[j]=0;
+      }
+    }
+
+  /*update popularity*/
+    setup.upPopularity=function(){
+      var com=50;
+      var noble=50;
+      var crime=50;
+      var abbey=50;
+      var watch=50;
+      
+      var watchPost=State.variables.watchPost;
+      var districtInf=State.variables.districtInf;
+      var districtPop=State.variables.districtPop;
+      var popInit=State.variables.districtPopInit;
+      var districtClass=State.variables.districtClass;
+      var lockdown=State.variables.lockdown;
+      var message=['','','','',''];
+      var newDead=State.variables.deadThisTurn;
+      var money=State.variables.money;
+      var food=State.variables.districtFood;
+      var isStarving=State.variables.isStarving;
+      var isVoted=State.variables.isVoted;
+      var distMF=State.variables.distMF;
+      
+      var totOutpost=0;
+      
+      var comInf=0;
+      var nobInf=0;
+      var criInf=0;
+      
+      var elDist=State.variables.actualElD;
+      var maDist=State.variables.actualMaskD;
+      var hunt=State.variables.actualHunt;
+      
+      var totComCurf=0;
+      var totNobCurf=0;
+      var totCriCurf=0;
+      
+      var totComLock=0;
+      var totNobLock=0;
+      var totCriLock=0;
+      
+      var totBury=0;
+      
+      var totComEl=0;
+      var totNobEl=0;
+      var totCriEl=0;
+      
+      var totComMa=0;
+      var totNobMa=0;
+      var totCriMa=0;
+      
+      var totComHu=0;
+      var totNobHu=0;
+      var totCriHu=0;
+      
+      var totComCol=0;
+      var totNobCol=0;
+      var totCriCol=0;
+      
+      var totfood=0;
+      
+      var totComStarv=0;
+      var totNobStarv=0;
+      var totCriStarv=0;
+      
+      var collapse=0;
+      
+      var plagueMF=0;
+      
+      var understaffing=0;
+      
+      for (var i=0; i<watchPost.length; i++){
+        //watch outpost
+        if(watchPost[i]==1){
+	        watch+=5;
+    	    crime-=5;
+          totOutpost+=5;
+        }
+        
+        //infection
+        if (districtInf[i]/districtPop[i]>0.05){
+          if (districtClass[i]=="Commoners"){
+            com-=5;
+            comInf+=5;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble-=5;
+            nobInf+=5;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime-=5;
+            criInf+=5;
+          }
+        }
+          
+          //curfew
+        if (lockdown[i]==1){
+          if (districtClass[i]=="Commoners"){
+            com-=10;
+            totComCurf+=10;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble-=10;
+            totNobCurf+=10;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime-=10;
+            totCriCurf+=10;
+          }
+        }
+        
+        //lockdown
+        if (lockdown[i]==2){
+          if (districtClass[i]=="Commoners"){
+            com-=15;
+            totComLock+=15;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble-=15;
+            totNobLock+=15;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime-=15;
+            totCriLock+=15;
+          }
+        }
+        
+        //dead per turn
+        if (newDead[i]>=500){
+          abbey-=15;
+          totBury+=15;
+        }
+        
+        //elixir distribution
+        if (elDist[i]>=1){
+          if (districtClass[i]=="Commoners"){
+            com+=10;
+            totComEl+=10;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble+=10;
+            totNobEl+=10;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime+=10;
+            totCriEl+=10;
+          }
+        }
+          
+        //mask distribution
+        if (maDist[i]>=1){
+          if (districtClass[i]=="Commoners"){
+            com+=5;
+            totComMa+=5;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble+=5;
+            totNobMa+=5;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime+=5;
+            totCriMa+=5;
+          }
+        }
+        
+        //rat hunting
+        if (hunt[i]>=1){
+          if (districtClass[i]=="Commoners"){
+            com+=10;
+            totComHu+=10;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble+=10;
+            totNobHu+=10;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime+=10;
+            totCriHu+=10;
+          }
+        }
+                
+        //food stock
+        if (food[i]>=1000){
+          if (districtClass[i]=="Commoners"){
+            com+=10;
+            totfood+=10;
+          }
+        }
+        
+        //starvation
+        if (isStarving[i]>=1 && isStarving[i]<10){
+          if (districtClass[i]=="Commoners"){
+            com-=isStarving[i];
+            totComStarv-=isStarving[i];
+          }
+          if (districtClass[i]=="Nobles"){
+            noble-=isStarving[i];
+            totNobStarv-=isStarving[i];
+          }
+          if (districtClass[i]=="Criminals"){
+            crime-=isStarving[i];
+            totCriStarv-=isStarving[i];
+          }
+        }
+        else if (isStarving[i]>=10){
+          if (districtClass[i]=="Commoners"){
+            com-=10;
+            totComStarv-=10;
+          }
+          if (districtClass[i]=="Nobles"){
+            noble-=10;
+            totNobStarv-=10;
+          }
+          if (districtClass[i]=="Criminals"){
+            crime-=10;
+            totCriStarv-=10;
+          }
+        }
+        
+        //collapse into criminality
+        if (i==9 || i==0 || i==13){
+          if (districtClass[i]=="Criminals"){
+            watch-=15;
+            collapse-=15;
+          }
+        }
+        
+        //MFs in plagued district
+        if(distMF[i]>=10 && districtInf/districtPop>=0.1){
+          watch-=5;
+          plagueMF-=5;
+        }
+        
+        //understaffing
+        if(isVoted[1]==1 && ((distMF[i]<3 && lockdown[i]==1)||(distMF[i]<5 && lockdown[i]==2))){
+          watch-=5;
+          understaffing-=5;
+        }
+        
+      }
+      
+      //laws
+      if(isVoted[0]==1){
+        abbey+=10;
+        message[2]+='<br> Plague victims get last rites: +5%';
+      }
+      if(isVoted[2]==1){
+        abbey+=10;
+        message[2]+='<br> Funding for new chapels: +10%';
+      }
+      if(isVoted[3]==1){
+        watch+=10;
+        message[1]+='<br> Funding for the armory: +10%';
+      }
+      if(isVoted[4]==1){
+        abbey+=10;
+        message[2]+='<br> Warfare Overseers: +10%';
+      }   
+      if(isVoted[5]==1){
+        abbey+=15;
+        message[2]+='<br> Raids on heretics: +15%';
+      }   
+      if(isVoted[6]==1){
+        com-=15;
+        message[3]+='<br> Drafting: -15%';
+      }           
+      
+      //money
+      if (money>=500000){
+      com-=15;
+        message[3]+='<br> Full treasury: -15%';
+      noble+=10;
+        message[0]+='<br> Full treasury: +10%';
+      }
+      
+      //message outposts
+      if (totOutpost!=0){
+        message[1]+='<br> Watch outposts: +'+totOutpost+'%';
+        message[4]+='<br> Watch outposts: -'+totOutpost+'%';
+      }
+      
+      //message infection
+      if (comInf!=0){
+          message[3]+='<br> Infection: -'+comInf+'%';
+        }
+      if (nobInf!=0){
+          message[0]+='<br> Infection: -'+nobInf+'%';
+        }
+      if (criInf!=0){
+          message[4]+='<br> Infection: -'+criInf+'%';
+        }
+      
+      //message curfew
+      if (totComCurf!=0){
+          message[3]+='<br> Curfews: -'+totComCurf+'%';
+        }
+      if (totNobCurf!=0){
+          message[0]+='<br> Curfews: -'+totNobCurf+'%';
+        }
+      if (totCriCurf!=0){
+          message[4]+='<br> Curfews: -'+totCriCurf+'%';
+        }
+      
+      //message lockdown
+      if (totComLock!=0){
+          message[3]+='<br> Lockdown: -'+totComLock+'%';
+        }
+      if (totNobLock!=0){
+          message[0]+='<br> Lockdown: -'+totNobLock+'%';
+        }
+      if (totCriLock!=0){
+          message[4]+='<br> Lockdown: -'+totCriLock+'%';
+        }
+      
+      //message too many dead to bury
+      if (totBury!=0){
+        message[2]+='<br> Too many dead to bury: -'+totBury+'%';
+      }
+      
+      //message elixir distribution
+      if (totComEl!=0){
+          message[3]+='<br> Elixir distribution: +'+totComEl+'%';
+        }
+      if (totNobEl!=0){
+          message[0]+='<br> Elixir distribution: +'+totNobEl+'%';
+        }
+      if (totCriEl!=0){
+          message[4]+='<br> Elixir distribution: +'+totCriEl+'%';
+        } 
+      
+      //message mask distribution
+      if (totComEl!=0){
+          message[3]+='<br> Mask distribution: +'+totComMa+'%';
+        }
+      if (totNobEl!=0){
+          message[0]+='<br> Mask distribution: +'+totNobMa+'%';
+        }
+      if (totCriEl!=0){
+          message[4]+='<br> Mask distribution: +'+totCriMa+'%';
+        } 
+      
+      //message rat hunt
+      if (totComEl!=0){
+          message[3]+='<br> Rat hunt: +'+totComHu+'%';
+        }
+      if (totNobEl!=0){
+          message[0]+='<br> Rat hunt: +'+totNobHu+'%';
+        }
+      if (totCriEl!=0){
+          message[4]+='<br> Rat hunt: +'+totCriHu+'%';
+        } 
+      
+      //message food
+      if (totfood!=0){
+          message[3]+='<br> High food stocks: +'+totfood+'%';
+        }
+      
+      //message starvation
+      if (totComStarv!=0){
+          message[3]+='<br> Starvation: '+totComStarv+'%';
+        }
+      if (totNobStarv!=0){
+          message[0]+='<br> Starvation: '+totNobStarv+'%';
+        }
+      if (totCriStarv!=0){
+          message[4]+='<br> Starvation: '+totCriStarv+'%';
+        } 
+        
+      //message collapse
+      if (collapse!=0){
+          message[1]+='<br> Some districts have fallen into criminal hands: '+collapse+'%';
+        }
+      
+      //message plagued MFs
+      if (plagueMF!=0){
+          message[1]+='<br> Many Watchmen are stationed in plagued areas: '+plagueMF+'%';
+        }
+      
+      //message understaffing
+      if(understaffing!=0){
+        message[1]+='<br> Understaffing: '+understaffing+'%';
+      }
+      
+      State.variables.commonerPop=com;
+      State.variables.noblePop=noble;
+      State.variables.criminalPop=crime;
+      State.variables.abbeyPop=abbey;
+      State.variables.watchPop=watch;
+      State.variables.popMessage=message;
+      
+    }
+
+  /*district collapse into crime*/
+    setup.collapse=function(){
+      var pop=State.variables.districtPop;
+      var popInit=State.variables.districtPopInit;
+      var name=State.variables.districtName;
+      var dclass=State.variables.districtClass;
+      var DDR=[0,9,13];
+      
+      for (let i in DDR ){
+        if (pop[DDR[i]]/popInit[DDR[i]]<0.25 && dclass[DDR[i]]!='Criminals'){
+          dclass[DDR[i]]='Criminals';
+        State.variables.dialog+=(name[DDR[i]]+" has collapsed into criminality.");
+        }
+      }
+      State.variables.districtClass=dclass;
+    }
+
+	/*voting update*/
+	setup.upVote=function(){
+      var vote=State.variables.vote;
+      vote=vote+10;
+      State.variables.vote=vote;
+    }
+
+	/*MFs update*/
+	setup.upMF=function(){
+      var mf=State.variables.mf;
+      var isVoted=State.variables.isVoted;
+      mf=20+isVoted[7]*20;
+      State.variables.mf=mf;
+    }
+
+  /*update function*/
+    setup.update=function(){
+      State.variables.dialog="";
+      State.variables.turn+=1;
+      State.variables.day+=1;
+      setup.moneyUpdate();
+      setup.foodUpdate();
+      setup.elixirUpdate();
+      setup.energyUpdate(); 
+      State.variables.districtRat=setup.ratUpdate();
+      State.variables.districtInf=setup.infUpdate();
+      setup.upDeathMod();
+      setup.collapse();
+      setup.upVote();
+      setup.upPopularity();
+      setup.upMF();
+      
+      if (State.variables.dialog!=""){
+        Dialog.append(State.variables.dialog);
+        Dialog.open();
+      }
+    }
+
+/*UI BARS*/
+
+  /* Create the Right UI Bar. */
+    var $rightUiBar = $('<div id="right-ui-bar" class="stowed"></div>').insertAfter("#ui-overlay");
+
+    var rightTray = $rightUiBar.append('<div id="right-ui-bar-tray"><button id="right-ui-bar-toggle" tabindex="0" title="Toggle the Right UI bar" aria-label="Toggle the Right UI bar" type="button"></button></div>');
+
+    var rightBody = $rightUiBar.append('<div id="right-ui-bar-body"></div>');
+    $rightUiBar.find('#right-ui-bar-toggle').ariaClick({label : "Toggle the Right UI bar"}, () => $rightUiBar.toggleClass('stowed'));
+    postrender["Display Right Sidebar Contents"] = function (content, taskName) {
+        setPageElement('right-ui-bar-body', 'StoryRightSidebar');
+    };
+
+  /*toggle the right UI bar depending on district*/
+
+    window.stowRightUi=function(current) {
+      var rub = document.getElementById('right-ui-bar');
+      var last=State.variables.district;
+
+        if (rub.classList.contains('stowed')){
+         rub.classList.remove('stowed');
+         State.variables.district=current;
+        }
+        else{
+          if (last==current)
+            rub.classList.add('stowed');
+          else
+            State.variables.district=current;
+      }
+    }
+
+  /*stow right UI bar*/
+
+    window.stowRightUi2=function() {
+      var rub = document.getElementById('right-ui-bar');
+      if (rub.classList.contains('stowed')){
+      }
+        else{
+            rub.classList.add('stowed');
+      }
+    }
+
+  /*click on the trade map*/
+
+    window.clickTrade=function(click){
+      var isTrading=State.variables.isTrading;
+      var max=State.variables.rail[click]+2;
+
+      if (isTrading==1){
+        if (setup.countRoutes(click)==max){
+          UI.alert("This district can't have more than "+max+" outgoing routes.");
+        }
+        else{
+        	State.variables.source=click;
+        	State.variables.isTrading=2;
+        }
+      }
+      if(isTrading==2){
+        State.variables.dest=click;
+        State.variables.isTrading=3;
+      }
+    }
+
+  /*passage when clicking on the trade map*/
+
+    window.passageTrade=function(){
+      var isTrading=State.variables.isTrading;
+
+      if (isTrading==1){
+        return("Trade map");
+      }
+      else{
+        return("Main map");
+      }
+    }
+
+  /*passage when deleting routes*/
+
+    window.passageDelete=function(){
+      var isTrading=State.variables.isTrading;
+
+      if (isTrading==1||isTrading==2){
+        return("Trade map");
+      }
+      else{
+        return("Main map");
+      }
+    }
+
+  /*confirm trade*/
+
+    setup.confirmTrade=function(){
+      var trade=State.variables.trade;
+      var resourceTrade=State.variables.resourceTrade;
+      var source=State.variables.source;
+      var dest=State.variables.dest;
+
+      if (resourceTrade==1) {
+        State.variables.foodRoutes[source][dest]=trade;
+      }
+      else{
+        State.variables.elixirRoutes[source][dest]=trade;
+      }
+      State.variables.isTrading=0;
+      State.variables.trade=0;
+    }
+
+  /*number of outgoing trade routes*/
+	setup.countRoutes=function(district){
+      var food=State.variables.foodRoutes;
+      var elixir=State.variables.elixirRoutes;
+      var count=0;
+      for (var j = 0; j < food.length; j++){
+        if (food[district][j]!=0){
+          count+=1;
+        }
+        if (elixir[district][j]!=0){
+          count+=1;
+        }
+      }
+      return(count);
+    }
+
+  /* Create the trade routes UI Bar. */
+    var $tradeUiBar = $('<div id="trade-ui-bar" class="stowed"></div>').insertAfter("#right-ui-bar");
+
+    var tradeTray = $tradeUiBar.append('<div id="trade-ui-bar-tray"><button id="trade-ui-bar-toggle" tabindex="0" title="Toggle the Trade UI bar" aria-label="Toggle the Trade UI bar" type="button"></button></div>');
+
+    var tradeBody = $tradeUiBar.append('<div id="trade-ui-bar-body"></div>');
+    $tradeUiBar.find('#trade-ui-bar-toggle').ariaClick({label : "Toggle the Trade UI bar"}, () => $tradeUiBar.toggleClass('stowed'));
+    postrender["Display Trade Sidebar Contents"] = function (content, taskName) {
+        setPageElement('trade-ui-bar-body', 'StoryTradeSidebar');
+    };
+
+  /*stow the trade UI bar*/
+
+    window.stowTradeUi=function() {
+      var tub = document.getElementById('trade-ui-bar');
+      tub.classList.add('stowed');
+    }
+
+  /*toggle the right UI bar*/
+
+    window.toggleTradeUI=function() {
+      var tub = document.getElementById('trade-ui-bar');
+
+        if (tub.classList.contains('stowed')){
+         tub.classList.remove('stowed');
+        }
+        else{
+            tub.classList.add('stowed');
+      }
+    }
+
+/*map highlight*/
+!function(a,b){"function"==typeof define&&define.amd?define(["jquery"],b):b(a.jQuery)}(window,function(a){var b,c,d,e,f,g,h,i,j,k,l;if(c=!!document.createElement("canvas").getContext,b=function(){var a=document.createElement("div");a.innerHTML='<v:shape id="vml_flag1" adj="1" />';var b=a.firstChild;return b.style.behavior="url(#default#VML)",!b||"object"==typeof b.adj}(),!c&&!b)return void(a.fn.maphilight=function(){return this});if(c){i=function(a){return Math.max(0,Math.min(parseInt(a,16),255))},j=function(a,b){return"rgba("+i(a.substr(0,2))+","+i(a.substr(2,2))+","+i(a.substr(4,2))+","+b+")"},d=function(b){var c=a('<canvas style="width:'+a(b).width()+"px;height:"+a(b).height()+'px;"></canvas>').get(0);return c.getContext("2d").clearRect(0,0,a(b).width(),a(b).height()),c};var m=function(a,b,c,d,e){if(d=d||0,e=e||0,a.beginPath(),"rect"==b)a.rect(c[0]+d,c[1]+e,c[2]-c[0],c[3]-c[1]);else if("poly"==b){a.moveTo(c[0]+d,c[1]+e);for(var f=2;f<c.length;f+=2)a.lineTo(c[f]+d,c[f+1]+e)}else"circ"==b&&a.arc(c[0]+d,c[1]+e,c[2],0,2*Math.PI,!1);a.closePath()};e=function(b,c,d,e,f){var h=b.getContext("2d");if(e.shadow){h.save(),"inside"==e.shadowPosition&&(m(h,c,d),h.clip());var i=100*b.width,k=100*b.height;m(h,c,d,i,k),h.shadowOffsetX=e.shadowX-i,h.shadowOffsetY=e.shadowY-k,h.shadowBlur=e.shadowRadius,h.shadowColor=j(e.shadowColor,e.shadowOpacity);var l=e.shadowFrom;l||(l="outside"==e.shadowPosition?"fill":"stroke"),"stroke"==l?(h.strokeStyle="rgba(0,0,0,1)",h.stroke()):"fill"==l&&(h.fillStyle="rgba(0,0,0,1)",h.fill()),h.restore(),"outside"==e.shadowPosition&&(h.save(),m(h,c,d),h.globalCompositeOperation="destination-out",h.fillStyle="rgba(0,0,0,1);",h.fill(),h.restore())}h.save(),m(h,c,d),e.fill&&(h.fillStyle=j(e.fillColor,e.fillOpacity),h.fill()),e.stroke&&(h.strokeStyle=j(e.strokeColor,e.strokeOpacity),h.lineWidth=e.strokeWidth,h.stroke()),h.restore(),e.fade&&a(b).css("opacity",0).animate({opacity:1},100)},f=function(a){a.getContext("2d").clearRect(0,0,a.width,a.height)}}else d=function(b){return a('<var style="zoom:1;overflow:hidden;display:block;width:'+b.width+"px;height:"+b.height+'px;"></var>').get(0)},e=function(b,c,d,e,f){var g,h,i,j;for(var k in d)d[k]=parseInt(d[k],10);g='<v:fill color="#'+e.fillColor+'" opacity="'+(e.fill?e.fillOpacity:0)+'" />',h=e.stroke?'strokeweight="'+e.strokeWidth+'" stroked="t" strokecolor="#'+e.strokeColor+'"':'stroked="f"',i='<v:stroke opacity="'+e.strokeOpacity+'"/>',"rect"==c?j=a('<v:rect name="'+f+'" filled="t" '+h+' style="zoom:1;margin:0;padding:0;display:block;position:absolute;left:'+d[0]+"px;top:"+d[1]+"px;width:"+(d[2]-d[0])+"px;height:"+(d[3]-d[1])+'px;"></v:rect>'):"poly"==c?j=a('<v:shape name="'+f+'" filled="t" '+h+' coordorigin="0,0" coordsize="'+b.width+","+b.height+'" path="m '+d[0]+","+d[1]+" l "+d.join(",")+' x e" style="zoom:1;margin:0;padding:0;display:block;position:absolute;top:0px;left:0px;width:'+b.width+"px;height:"+b.height+'px;"></v:shape>'):"circ"==c&&(j=a('<v:oval name="'+f+'" filled="t" '+h+' style="zoom:1;margin:0;padding:0;display:block;position:absolute;left:'+(d[0]-d[2])+"px;top:"+(d[1]-d[2])+"px;width:"+2*d[2]+"px;height:"+2*d[2]+'px;"></v:oval>')),j.get(0).innerHTML=g+i,a(b).append(j)},f=function(b){var c=a("<div>"+b.innerHTML+"</div>");c.children("[name=highlighted]").remove(),b.innerHTML=c.html()};g=function(a){var b,c=a.getAttribute("coords").split(",");for(b=0;b<c.length;b++)c[b]=parseFloat(c[b]);return[a.getAttribute("shape").toLowerCase().substr(0,4),c]},l=function(b,c){var d=a(b);return a.extend({},c,!!a.metadata&&d.metadata(),d.data("maphilight"))},k=function(a){return!!a.complete&&("undefined"==typeof a.naturalWidth||0!==a.naturalWidth)},h={position:"absolute",left:0,top:0,padding:0,border:0};var n=!1;a.fn.maphilight=function(i){return i=a.extend({},a.fn.maphilight.defaults,i),c||n||(a(window).ready(function(){document.namespaces.add("v","urn:schemas-microsoft-com:vml");var b=document.createStyleSheet(),c=["shape","rect","oval","circ","fill","stroke","imagedata","group","textbox"];a.each(c,function(){b.addRule("v\\:"+this,"behavior: url(#default#VML); antialias:true")})}),n=!0),this.each(function(){var j,m,n,o,p,q,s;if(j=a(this),!k(this))return window.setTimeout(function(){j.maphilight(i)},200);if(n=a.extend({},i,!!a.metadata&&j.metadata(),j.data("maphilight")),s=j.get(0).getAttribute("usemap"),s&&(o=a('map[name="'+s.substr(1)+'"]'),j.is('img,input[type="image"]')&&s&&o.length>0)){if(j.hasClass("maphilighted")){var t=j.parent();j.insertBefore(t),t.remove(),a(o).unbind(".maphilight")}m=a("<div></div>").css({display:"block",backgroundImage:'url("'+this.src+'")',backgroundSize:"contain",position:"relative",padding:0,width:this.width,height:this.height}),n.wrapClass&&(n.wrapClass===!0?m.addClass(a(this).attr("class")):m.addClass(n.wrapClass)),j.before(m).css("opacity",0).css(h).remove(),b&&j.css("filter","Alpha(opacity=0)"),m.append(j),p=d(this),a(p).css(h),p.height=this.height,p.width=this.width,a(o).bind("alwaysOn.maphilight",function(){q&&f(q),c||a(p).empty(),a(o).find("area[coords]").each(function(){var b,f;f=l(this,n),f.alwaysOn&&(!q&&c&&(q=d(j[0]),a(q).css(h),q.width=j[0].width,q.height=j[0].height,j.before(q)),f.fade=f.alwaysOnFade,b=g(this),c?e(q,b[0],b[1],f,""):e(p,b[0],b[1],f,""))})}).trigger("alwaysOn.maphilight").bind("mouseover.maphilight, focus.maphilight",function(b){var d,f,h=b.target;if(f=l(h,n),!f.neverOn&&!f.alwaysOn){if(d=g(h),e(p,d[0],d[1],f,"highlighted"),f.groupBy){var i;i=/^[a-zA-Z][\-a-zA-Z]+$/.test(f.groupBy)?o.find("area["+f.groupBy+'="'+a(h).attr(f.groupBy)+'"]'):o.find(f.groupBy);var j=h;i.each(function(){if(this!=j){var a=l(this,n);if(!a.neverOn&&!a.alwaysOn){var b=g(this);e(p,b[0],b[1],a,"highlighted")}}})}c||a(p).append("<v:rect></v:rect>")}}).bind("mouseout.maphilight, blur.maphilight",function(a){f(p)}),j.before(p),j.addClass("maphilighted")}})},a.fn.maphilight.defaults={fill:!0,fillColor:"000000",fillOpacity:.2,stroke:!0,strokeColor:"ff0000",strokeOpacity:1,strokeWidth:1,fade:!0,alwaysOn:!1,neverOn:!1,groupBy:!1,wrapClass:!0,shadow:!1,shadowX:0,shadowY:0,shadowRadius:6,shadowColor:"000000",shadowOpacity:.8,shadowPosition:"outside",shadowFrom:!1}});
+
+//numberpool macro
+
+/*! <<numberpool>> macro set for SugarCube v2 */
+!function(){"use strict";if("undefined"==typeof version||void 0===version.title||"SugarCube"!==version.title||void 0===version.major||version.major<2||void 0===version.minor||version.minor<22)throw new Error("<<numberpool>> macro set requires SugarCube 2.22.0 or greater, aborting load");Macro.add("numberinput",{handler:function(){function validateAndApply(el,addend){var curValue=Math.trunc(State.getVar(varName)),newValue=Math.trunc(el.value),newPoolValue=null;if(Number.isNaN(newValue)||!Number.isFinite(newValue))return el.value=curValue,!1;if(null!=addend&&(newValue+=addend),newValue<minValue?newValue=minValue:newValue>maxValue&&(newValue=maxValue),null!==pool){var poolValue=pool.get(),delta=(newValue-curValue)*poolCost;delta<0?newPoolValue=poolValue-delta:delta>0&&poolValue>=poolCost?(poolValue<delta&&(newValue=curValue+Math.trunc(poolValue/poolCost),delta=poolValue-poolValue%poolCost),newPoolValue=poolValue-delta):newValue=curValue}return State.setVar(varName,newValue),el.value=newValue,null!==newPoolValue&&pool.set(newPoolValue),!0}var _this=this;if(this.args.length<4){var errors=[];return this.args.length<1&&errors.push("variable name"),this.args.length<2&&errors.push("default value"),this.args.length<3&&errors.push("min value"),this.args.length<4&&errors.push("max value"),this.error("no "+errors.join(" or ")+" specified")}if("string"!=typeof this.args[0])return this.error("variable name argument is not a string");var varName=this.args[0].trim();if("$"!==varName[0]&&"_"!==varName[0])return this.error('variable name "'+this.args[0]+'" is missing its sigil ($ or _)');var varId=Util.slugify(varName),defValue=Number(this.args[1]),minValue=Number(this.args[2]),maxValue=Number(this.args[3]),poolCost=1,autofocus=!1;if(this.args.length>5?(poolCost=Number(this.args[4]),autofocus="autofocus"===this.args[5]):this.args.length>4&&("autofocus"===this.args[4]?autofocus=!0:poolCost=Number(this.args[4])),Number.isNaN(defValue)||!Number.isFinite(defValue)||Math.trunc(defValue)!==defValue)return this.error("default value ("+this.args[1]+") is not a whole number");if(Number.isNaN(minValue)||!Number.isFinite(minValue)||Math.trunc(minValue)!==minValue)return this.error("min value ("+this.args[2]+") is not a whole number");if(Number.isNaN(maxValue)||!Number.isFinite(maxValue)||Math.trunc(maxValue)!==maxValue)return this.error("max value ("+this.args[3]+") is not a whole number");if(Number.isNaN(poolCost)||!Number.isFinite(poolCost)||Math.trunc(poolCost)!==poolCost||poolCost<=0)return this.error("pool cost ("+this.args[4]+") is not a whole number greater than zero");if(defValue<minValue)return this.error("default value ("+this.args[1]+") is less than min value ("+this.args[2]+")");if(defValue>maxValue)return this.error("default value ("+this.args[1]+") is greater than max value ("+this.args[3]+")");var pool=function(){var parent=_this.contextSelect(function(ctx){return"numberpool"===ctx.name});return null!==parent&&parent.hasOwnProperty("pool")?parent.pool:null}();Config.debug&&this.debugView.modes({block:!0});var $elControl=jQuery(document.createElement("div")),$elInput=jQuery(document.createElement("input"));$elControl.attr("id",this.name+"-body-"+varId).addClass("macro-"+this.name).appendTo(this.output),jQuery(document.createElement("button")).attr({id:this.name+"-minus-"+varId}).text("").ariaClick(this.createShadowWrapper(function(){return validateAndApply($elInput.get(0),-1)})).appendTo($elControl),$elInput.attr({id:this.name+"-input-"+varId,name:this.name+"-input-"+varId,type:"text",pattern:"\\d+",tabindex:0}).on("change",this.createShadowWrapper(function(){validateAndApply(this)})).on("keypress",function(ev){13===ev.which&&(ev.preventDefault(),$elInput.trigger("change"))}).appendTo($elControl),jQuery(document.createElement("button")).attr({id:this.name+"-plus-"+varId}).text("").ariaClick(this.createShadowWrapper(function(){return validateAndApply($elInput.get(0),1)})).appendTo($elControl),$elInput.val(defValue),validateAndApply($elInput.get(0)),autofocus&&($elInput.attr("autofocus","autofocus"),jQuery(document).one(":passagedisplay",function(){return setTimeout(function(){return $elInput.focus()},Engine.minDomActionDelay)}))}}),Macro.add("numberpool",{tags:["onchange"],handler:function(){if(0===this.args.length)return this.error("no variable name specified");if(this.payload.length>2)return this.error("multiple <<onchange>> sections specified");if("string"!=typeof this.args[0])return this.error("variable name argument is not a string");var varName=this.args[0].trim();if("$"!==varName[0]&&"_"!==varName[0])return this.error('variable name "'+this.args[0]+'" is missing its sigil ($ or _)');var curValue=State.getVar(varName);if("number"!=typeof curValue||Number.isNaN(curValue)||!Number.isFinite(curValue))return this.error("pool value is not a number");var varId=Util.slugify(varName);TempState.hasOwnProperty(this.name)||(TempState[this.name]={}),TempState[this.name].hasOwnProperty(varId)||(TempState[this.name][varId]=0),Object.defineProperty(this,"pool",{value:Object.defineProperties({},{get:{value:function(){return State.getVar(varName)}},set:{value:function(content){return function(value){value!==State.getVar(varName)&&(State.setVar(varName,value),content&&new Wikifier(null,content))}}(this.payload.length>1?this.payload[1].contents.trim():"")}})}),jQuery(document.createElement("div")).attr("id",this.name+"-"+varId+"-"+TempState[this.name][varId]++).addClass("macro-"+this.name).wiki(this.payload[0].contents.replace(/^\n/,"")).appendTo(this.output)}}),Macro.add("numberslider",{handler:function(){function stepValidate(value){if(fracDigits>0){var ma=Number(minValue+"e"+fracDigits),sa=Number(stepValue+"e"+fracDigits),_va=Number(value+"e"+fracDigits)-ma;return Number(_va-_va%sa+ma+"e-"+fracDigits)}var va=value-minValue;return va-va%stepValue+minValue}function validateAndApply(el){var curValue=State.getVar(varName),newValue=Number(el.value),newPoolValue=null;if(Number.isNaN(newValue)||!Number.isFinite(newValue))return el.value=curValue,!1;if(newValue=stepValidate(newValue),newValue<minValue?newValue=minValue:newValue>maxValue&&(newValue=maxValue),null!==pool)if(fracDigits>0){var pa=Number(pool.get()+"e"+fracDigits),ca=Number(curValue+"e"+fracDigits),na=Number(newValue+"e"+fracDigits),delta=na-ca;pa<delta&&(na-=delta-pa,delta=na-ca,newValue=Number(na+"e-"+fracDigits)),newPoolValue=Number(pa-delta+"e-"+fracDigits)}else{var poolValue=pool.get(),_delta=newValue-curValue;poolValue<_delta&&(newValue-=_delta-poolValue,_delta=newValue-curValue),newPoolValue=poolValue-_delta}return State.setVar(varName,newValue),el.value=newValue,null!==newPoolValue&&pool.set(newPoolValue),!0}var _this2=this;if(this.args.length<5){var errors=[];return this.args.length<1&&errors.push("variable name"),this.args.length<2&&errors.push("default value"),this.args.length<3&&errors.push("min value"),this.args.length<4&&errors.push("max value"),this.args.length<5&&errors.push("step value"),this.error("no "+errors.join(" or ")+" specified")}if("string"!=typeof this.args[0])return this.error("variable name argument is not a string");var varName=this.args[0].trim();if("$"!==varName[0]&&"_"!==varName[0])return this.error('variable name "'+this.args[0]+'" is missing its sigil ($ or _)');var varId=Util.slugify(varName),defValue=Number(this.args[1]),minValue=Number(this.args[2]),maxValue=Number(this.args[3]),stepValue=Number(this.args[4]),autofocus=this.args.length>5&&"autofocus"===this.args[5];if(Number.isNaN(defValue)||!Number.isFinite(defValue))return this.error("default value ("+this.args[1]+") is not a number");if(Number.isNaN(minValue)||!Number.isFinite(minValue))return this.error("min value ("+this.args[2]+") is not a number");if(Number.isNaN(maxValue)||!Number.isFinite(maxValue))return this.error("max value ("+this.args[3]+") is not a number");if(Number.isNaN(stepValue)||!Number.isFinite(stepValue)||stepValue<=0)return this.error("step value ("+this.args[4]+") is not a number greater than zero");if(defValue<minValue)return this.error("default value ("+this.args[1]+") is less than min value ("+this.args[2]+")");if(defValue>maxValue)return this.error("default value ("+this.args[1]+") is greater than max value ("+this.args[3]+")");var fracDigits=function(){var str=String(stepValue),pos=str.lastIndexOf(".");return-1===pos?0:str.length-pos-1}();if(stepValidate(maxValue)!==maxValue)return this.error("max value ("+this.args[3]+") is not a multiple of the step value ("+this.args[4]+") plus the min value ("+this.args[2]+")");var pool=function(){var parent=_this2.contextSelect(function(ctx){return"numberpool"===ctx.name});return null!==parent&&parent.hasOwnProperty("pool")?parent.pool:null}();Config.debug&&this.debugView.modes({block:!0});var $elControl=jQuery(document.createElement("div")),$elInput=jQuery(document.createElement("input")),$elValue=void 0,showValue=void 0;$elControl.attr("id",this.name+"-body-"+varId).addClass("macro-"+this.name).appendTo(this.output),$elInput.attr({id:this.name+"-input-"+varId,name:this.name+"-input-"+varId,type:"range",min:minValue,max:maxValue,step:stepValue,tabindex:0}).on("change input."+Util.slugify(this.name),this.createShadowWrapper(function(){validateAndApply(this),"function"==typeof showValue&&showValue()})).on("keypress",function(ev){13===ev.which&&(ev.preventDefault(),$elInput.trigger("change"))}).appendTo($elControl),!Browser.isIE||Browser.ieVersion>9?($elValue=jQuery(document.createElement("span")).attr("id",this.name+"-value-"+varId).appendTo($elControl),showValue=function(){$elValue.text(Number($elInput.val()).toFixed(fracDigits))}):$elInput.off("input."+Util.slugify(this.name)),$elInput.val(defValue),validateAndApply($elInput.get(0)),"function"==typeof showValue&&showValue(),autofocus&&($elInput.attr("autofocus","autofocus"),jQuery(document).one(":passagedisplay",function(){return setTimeout(function(){return $elInput.focus()},Engine.minDomActionDelay)}))}})}();
+
+
+:: Main map [bbar no-transition tbar] {"position":"800,350","size":"100,100"}
+<center>\
+	<!-- Image Map Generated by http://www.image-map.net/ -->\
+	<img src="media/img/map.png" usemap="#image-map">\
+	\
+	<map name="image-map">\
+    	<area data-passage="Main map"    onClick="window.stowRightUi(0)"  title="Draper's Ward"  coords="294,326,288,308,298,281,295,264,318,247,370,206,369,191,349,171,255,189,251,153,271,96,264,59,288,48,315,25,38,24,27,39,27,493,44,485,64,443,64,396,79,361,106,363,111,352,167,338,197,314,216,361,240,360,256,318,273,318" shape="poly">\
+    	<area   data-passage="Main map"  onClick="window.stowRightUi(1)"    title="Old Waterfront" coords="491,323,512,302,494,291,493,259,495,239,526,164,531,131,531,101,565,25,311,26,301,40,265,60,270,100,253,154,260,192,345,172,361,179,369,196,367,210,352,219,312,254,294,263,297,279,289,303,296,331,310,317,320,315,331,331,426,313,439,325" shape="poly">\
+    	<area    data-passage="Main map"  onClick="window.stowRightUi(2)"    title="Civil Service District" coords="567,25,533,102,535,133,552,142,562,150,569,154,583,171,617,191,648,197,698,213,726,237,760,243,756,220,772,193,786,196,788,180,789,161,771,141,764,130,772,112,782,88,766,76,772,59,796,25" shape="poly">\
+		<area   data-passage="Main map"  onClick="window.stowRightUi(3)"   title="Estate District"  coords="492,322,510,302,493,287,498,236,528,159,534,136,555,144,567,153,586,170,622,192,642,194,697,214,726,237,724,252,710,257,737,325,762,336,785,341,775,387,767,364,710,372,672,381,635,379,629,393,612,395,615,373,574,372,529,352" shape="poly">\
+    	<area   data-passage="Main map"  onClick="window.stowRightUi(4)"   title="Tower District" coords="777,389,786,343,755,332,736,322,709,258,727,253,726,239,759,244,758,216,771,197,787,197,789,159,828,138,836,149,941,182,952,204,984,220,967,245,986,273,1013,266,1019,275,1009,292,958,302,961,319,960,331,918,329,887,349,885,371,853,378,839,348,808,362,790,390" shape="poly">\
+    	<area   data-passage="Main map"  onClick="window.stowRightUi(5)"    title="Academy District" coords="981,219,1003,210,1003,193,1023,187,1023,170,1032,154,1013,135,1029,110,1024,25,797,25,773,57,768,79,780,86,778,106,768,125,768,137,778,154,789,161,832,132,830,146,854,153,883,159,941,182,953,202" shape="poly">\
+    	<area   data-passage="Main map"  onClick="window.stowRightUi(6)"   title="Legal District"  coords="1004,213,1004,192,1022,185,1023,168,1035,150,1013,135,1029,109,1024,24,1235,24,1254,37,1251,215,1236,230,1212,231,1175,218,1180,205,1148,188,1133,165,1121,166,1118,183,1104,189,1109,206,1091,235,1039,222" shape="poly">\
+    	<area  data-passage="Main map"  onClick="window.stowRightUi(7)"  title="Slaughterhouse Row" coords="25,643,25,861,41,875,402,874,408,848,372,795,334,771,302,736,290,702,262,675,244,646,215,625,203,605,154,574,132,608,113,618,104,630,79,637,45,627" shape="poly">\
+    	<area  data-passage="Main map"  onClick="window.stowRightUi(8)"  title="Holger Square" coords="168,482,179,529,152,546,149,573,207,605,257,553,270,525,223,521,213,503" shape="poly">\
+    	<area  data-passage="Main map"  onClick="window.stowRightUi(9)"  title="Distillery District" coords="205,605,215,626,249,649,262,677,293,705,303,736,334,771,370,794,385,811,411,789,422,755,445,726,457,716,461,678,469,644,463,604,425,552,446,505,439,451,422,427,382,427,344,431,326,418,299,435,288,448,242,432,227,467,187,456,170,479,212,503,224,523,257,527,274,522,257,553" shape="poly">\
+    	<area  data-passage="Main map"  onClick="window.stowRightUi(10)"  title="Downmarket District" coords="424,431,442,456,447,505,426,555,467,607,470,651,462,684,456,719,422,754,415,790,386,814,409,845,403,875,744,874,725,738,738,732,746,709,792,699,816,687,823,658,848,645,832,645,837,623,816,587,734,579,718,529,721,468,711,458,677,467,647,468,574,448,561,460,546,443,524,426,501,441,473,421,457,422,441,436" shape="poly">\
+    	<area   data-passage="Main map"  onClick="window.stowRightUi(11)"   title="Old Port District" coords="724,468,719,528,733,578,820,585,836,621,834,642,849,643,935,604,954,622,975,624,1012,614,1081,637,1098,614,1060,585,1045,559,1029,553,1011,531,1009,501,997,477,1032,455,997,447,981,462,948,462,910,483,889,472,876,482,821,468,825,499,849,513,865,547,841,531,814,521,798,502,758,491,744,467" shape="poly">\
+    	<area  data-passage="Main map"  onClick="window.stowRightUi(12)"   title="Wyrmwood District" coords="746,874,910,873,910,769,1027,769,1021,699,988,707,1043,665,1080,637,1012,613,976,624,951,623,934,603,824,656,818,689,794,699,747,709,737,729,723,741" shape="poly">\
+    	<area  data-passage="Main map"  onClick="window.stowRightUi(13)"  title="Rudshore Financial District" coords="1029,455,998,475,1007,499,1014,533,1026,548,1052,562,1058,583,1101,615,1054,658,992,706,1021,698,1028,769,1217,769,1219,874,1243,874,1252,848,1252,433,1183,443,1156,424,1141,430,1152,449,1131,451,1117,438,1089,429,1063,436,1043,455" shape="poly">\
+    	<area data-passage="Main map"  onClick="window.stowRightUi(14)"  title="Kingsparrow Island"  coords="1113,304,52" shape="circle">\
+	</map>\
+</center>\
+
+
+:: StoryInit {"position":"700,150","size":"100,100"}
+/* Basic Game Info */
+  <<set $money to 0>>
+  <<set $energy to 0>>
+  <<set $mf to 20>>
+  <<set $vote to 0>>
+  <<set $dialog to "">>
+
+/* District info */
+  <<set $district to -1>>
+  <<set $districtName to ['Draper\'s Ward', 'Old Waterfront', 'Civil Service District', 'Estate District', 'Tower District', 'Academy District', 'Legal District', 'Slaughterhouse Row', 'Holger Square', 'Distillery District', 'Downmarket District', 'Old Port District', 'Wyrmwood District', 'Rudshore Financial District', 'Kingsparrow Island']>>
+  <<set $districtNeighbor to [ [0,5,0,0,0,0,0,0,0,1,0,0,0,0,0],[5,0,5,5,0,0,0,0,0,1,0,0,0,0,0],[0,5,0,5,5,5,0,0,0,0,0,0,0,0,0],[0,5,5,0,5,0,0,0,0,0,1,0,0,0,0],[0,0,5,5,0,5,0,0,0,0,0,1,0,0,0],[0,0,5,5,5,0,5,0,0,0,0,0,0,0,0],[0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,5,5,0,0,0,0,0],[0,0,0,0,0,0,0,5,0,5,0,0,0,0,0],[1,1,0,0,0,0,0,5,5,0,5,0,0,0,0],[0,0,0,1,0,0,0,0,0,5,0,5,5,0,0],[0,0,0,0,1,0,0,0,0,0,5,0,5,5,0],[0,0,0,0,0,0,0,0,0,0,5,5,0,5,0],[0,0,0,0,0,0,0,0,0,0,0,5,5,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] ]>>
+  <<set $districtPop to [120000, 120000, 120000, 60000,50000,150000,110000,150000,0,350000,400000,200000,0,110000,0]>>
+  <<set $districtPopInit to $districtPop>>
+  <<set $districtClass to ['Nobles','Commoners','Commoners','Nobles','Nobles','Commoners','Nobles','Commoners','Overseers','Commoners','Commoners','Commoners','Criminals','Nobles','Military']>>
+
+/* production*/
+  <<set $districtMoney to [4,3,3,5,5,3,4,2,0,2,1,2,0,4,0]>>
+  <<set $districtEnergy to [0,1,0,0,0,0,0,5,0,0,0,0,0,0,0]>>
+  <<set $districtFood to [0, 180, 120, 0,0,0,0,220,0,520,600,300,0,0,0]>>
+  <<set $districtElixir to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $deathModif to [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]>>
+
+/*stock*/
+  <<set $districtFoodStock to [120, 120, 120, 60,50,150,110,150,0,350,400,200,0,110,0]>>
+  <<set $districtElixirStock to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $distMF to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+
+/*infection*/
+  <<set $districtInf to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $districtRat to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $districtRat[setup.ratInit()] to 100>>
+  <<set $infHistory to []>>
+  <<set $deadThisTurn to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+
+/*plague measure*/
+  <<set $ratHunt to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $actualHunt to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $districtElDist to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $actualElD to []>>
+  <<set $districtMaskDist to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $actualMaskD to []>>
+  <<set $lockdown to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $wallOff to [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]>>
+
+/*infrastructures*/
+  <<set $sewer to [1,0,0,1,1,0,1,0,0,0,0,0,0,1,0]>>
+  <<set $docks to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $warehouses to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $hospital to [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $quarantine to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $elFact to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $rail to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+  <<set $slaught to [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]>>
+  <<set $watchPost to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+
+/*trade routes*/
+  <<set $foodRoutes to [ [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[60,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[60,0,0,0,0,0,10,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,60,0,0,0,0,0,0,0,0,0,110,0],[0,0,0,0,50,150,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,100,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] ]>>
+  <<set $elixirRoutes to [ [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] ]>>
+  <<set $isTrading to 0>>
+  <<set $source to -1>>
+  <<set $dest to -1>>
+  <<set $resourceTrade to -1>>
+  <<set $trade to 0>>
+
+/*events*/
+  <<set $isStarving to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+
+/*Turn system*/
+  <<set $turn to 1>>
+  <<set $year to 1835>>
+  <<set $monthCount to 0>>
+  <<set $monthArray to ['Clans', 'Songs', 'Earth', 'Harvest', 'Nets', 'Rain', 'Wind', 'Darkness', 'High Cold', 'Ice', 'Hearths', 'Seeds', 'Timber']>>
+  <<set $month to $monthArray[$monthCount]>>
+  <<set $day to 1>>
+
+/*popularity*/
+	<<set $commonerPop to 50>>
+	<<set $noblePop to 50>>
+	<<set $criminalPop to 50>>
+	<<set $abbeyPop to 50>>
+	<<set $watchPop to 50>>
+    <<set $popMessage to ['','','','','']>>
+    
+/*laws*/
+	<<set $lawName to ['Last rites','Understaffing','Chapel fund','Armory funding','Warfare Overseers','Rehabilitation centers','Raids on heretics','Drafting','Whale oil technologies','Rat exterminators','Custom processing','Curfews','Textile negociation','Lockdown','District termination','Farming contracts','Lower food quality standards','Deregulate ship safety standards','Raise standards in food conservation', 'Lengthen work hours in slaughterhouses', 'Cut control on medicine','Tax basic resources','Impose whaling quotas','Make medicine patents public','Tax on luxury resources','Rationing','Increase number of medicine sudents','Seize plague victim corpses','Increase work hours for natural philosophers','Government planification','Experimentation on weepers','Seize private laboratories','Human experimentation','Put research under military supervision','Underground city planning','Public transportation act','Emergency health fund','Wrenhaven development plan','Southern bank development plan','Warehouse subsidies','Big Pharma Lobbying','Chop shop']>>
+    <<set $lawDesc to ["Allow Overseers to perform last rites on plague victims. Increases Abbey popularity.","Reduces the number of Watch squad to enforce a curfew or a lockdown, but reduces Watch popularity when effective.","Funds the construction of new chapels. Increases Abbey popularity.","Increases the funds allocatted to the Watch's weaponry. Increases Watch popularity.", "Allows for the training of Warfare Overseers. Increases Abbey popularity.", "Funds new rehabilitation centers for Watch and Army veterans. Increases Watch popularity.", "Allows raids on people suspected of heresy. Increases Abbey popularity.", "Start mandatory drafting to bolster the ranks of the City Watch. Increases your troops, but lowers Commoners popularity.", "Double down on whale oil-based defensive infrastructures. Increases Watch popularity.","Unlock the option to pay exterminators to control the rat population.","Enacts custom processing on trade routes. Lowers contamination between districts, but caps the trade to 100 units per route.","Allows you to impose curfews on a district. Reduces plague propagation, but makes the local population unhappy.", "Negociate with textile company to get a discount on mask productions. Halves the price of masks.", "Allows you to put a district under lockdown. Reduces plague propagation a lot, but makes the local population very unhappy.","Allows you to wall off a district permanently, leaving its population to die. This district won't infect any other district and rats won't travel from there, but doing this will scandalize your citizens.","Tie new contracts with farmers from the surrounding countryside. Increases food production.","Lower standards means more food approved for consumption. Increases food production.","Removes some regulations on the riskiest whaling techniques, allowing high-risk, high-reward expeditions. Increases energy production.","Imposes new regulations on food conservation techniques, resulting in less waste. Increases food production.","Allows employers to impose longer hours in the butchering industry. Increases energy production.","Cuts the amount of control elixir has to go through before commercialisation. Increases elixir production.","Tax basic resources such as food, whale oil or textile. Increases money income, but lowers Commoners popularity.","Imposes quotas on whaling to avoid depleting the whale population. Increases whale oil production.", "Make medicine patents public domain, allowing anyone to produce them. Increases elixir production.","Tax luxury resources such as alcohol, fur or jewelry. Increases money income, but lowers Nobility popularity.","Allows you to impose rationing on a district. Halves the food consumption, but lowers your popularity with the local population.","Forces the Academy of Natural Philosophy to accept more students. Increases research speed.","Organize the seizing of plague victim bodies for research. Increases research speed.","Run your researchers ragged. Increases research speed.","In light of the emergency situation, all research is now controlled by the government. Surprisingly, this increases your research speed.","Allows the capture of weepers to be used as test subject. Increases research speed.","Nationalize private laboratories, including equipment and human resources. Increases research speed.","Prisoners from Coldridge will be used as test subject. Increases research speed.","Military regimen can only improve their catastrophical organization. Increases research speed.","Lowers the cost of sewers.","Lowers the cost of railways","Lowers the cost of hospital and quarantine houses.","Lowers the cost of docks.","Lowers the cost of infrastructures in Commoners district.","Lowers the cost of warehouses.","Lowers the cost of elixir factories.","Lowers the cost of slaughterhouses."]>>
+    <<set $lawTier to [1,1,2,2,3,3,4,4,4,1,2,2,3,3,4,1,2,2,3,3,3,3,4,4,4,4,1,2,2,3,3,4,4,4,1,2,2,3,3,4,4,4]>>
+    <<set $lawPrice to [75,200,150,150,250,200,300,225,100,100,150,175,200,275,250,150,150,100,250,100,200,150,300,300,250,275,75,100,75,200,150,300,200,250,100,150,200,175,300,250,300,275]>>
+    
+    <<set $currentTier to 1>>
+    <<set $isVoted to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]>>
+
+
+:: PassageHeader {"position":"400,450","size":"100,100"}
+<<if tags().includes("tbar")>>
+\
+<div id="topbar">\
+	<div id="topresources">\
+    <<link '<img src="media/img/ui/hamburger.png">' "Settings Menu">><</link>> Money: $money Energy: $energy Watch squads: $mf Votes: $vote
+\
+	</div>\
+ \
+/*set day and month*/ \
+<<if $day>29>>\
+	<<set $day -= 29>> \
+    <<set $monthCount to $monthCount+1>> \
+    <<set $month to $monthArray[$monthCount]>> \
+<<elseif ($day >28) and ($monthCount is 12)>> \
+	<<set $day -= 28>> \
+    <<set $monthCount to 0>> \
+    <<set $month to $monthArray[$monthCount]>> \
+<<elseif ($day == 29) and ($month is not 'Songs')>> \
+	<<set $day -= 28>> \
+    <<set $monthCount to $monthCount+1>> \
+    <<set $month to $monthArray[$monthCount]>> \
+<</if>>\
+\
+/*set year*/ \
+<<if $month is 'Earth' && $day == 1>> \
+	<<set $year += 1>> \
+<</if>> \
+\
+<div id="topturns">\
+/*Display*/ \
+Turn: $turn
+<<if $day == 29 && $month == 'Songs'>>\
+Fugue Feast
+<<else>>\
+Day $day, Month of $month, $year
+<</if>>\
+</div></div><</if>>
+
+
+:: GameOver {"position":"850,700","size":"100,100"}
+Hello, this is the game over screen.
+
+
+:: PassageDone {"position":"600,150","size":"100,100"}
+<<script>>
+
+// Apply maphilight to all images that have a usemap attribute, e.g.
+// all the maps that are in this twine. This sets the default styling
+// for all the maps. These are all the possible styling options.
+// Note: for picking colors, check out http://hslpicker.com/. You can
+// copy the HEX value as long as you leave off the "#".
+$("img[usemap]").maphilight({
+  fill: true,             	// Fill the area?
+  fillColor: 'caa81a',    	// HEX format without the starting "#"
+  fillOpacity: 0.5,       	// Opacity of the filled area
+  stroke: true,           	// Outline the area?
+  strokeColor: 'b99500',
+  strokeOpacity: 1,
+  strokeWidth: 3,			// Outline width
+  fade: true,             	// Animate when hovered with a fade?
+  alwaysOn: false,        	// Always show the areas?
+  neverOn: false,
+  groupBy: false,
+  wrapClass: true,
+  shadow: false,
+  shadowX: 0,
+  shadowY: 0,
+  shadowRadius: 6,
+  shadowColor: '000000',
+  shadowOpacity: 0.8,
+  shadowPosition: 'outside',
+  shadowFrom: false
+});
+
+<</script>>
+
+
+:: StoryRightSidebar {"position":"1000,225","size":"100,100"}
+<h1> $districtName[$district] </h1>
+----
+<<if $district==8>>\ /*Holger Square*/
+	<img src="media/img/districts/enthusiasm.png" >
+	\
+<<elseif $district==12>>\ /*Wyrmwood*/
+	<img src="media/img/districts/wyrmwood.png" >
+	\
+<<elseif $district==14>>\ /*Kingsparrow*/
+	Ships looks fine to me.
+	\
+<<else>>\ /*Normal districts*/
+	\
+	<<if $wallOff[$district] is 1>>\ /*District active*/
+	\
+	<h2> Population </h2>
+	$districtPop[$district] inhabitants ($districtClass[$district])
+	$districtInf[$district] infected
+	<<=$districtPopInit[$district]-$districtPop[$district]>> dead
+	$districtRat[$district] rats
+	----
+	<h2> Military forces </h2>
+    You have <span id="tempMF">$mf</span> squads remaining to allocate.
+<<numberpool "$mf">>
+    <<numberinput "$distMF[$district]" $distMF[$district] 0 $distMF[$district]+$mf autofocus>>
+	<<onchange>>
+        <<script>>
+        
+        var district=State.variables.district;
+        var lockdown=State.variables.lockdown;        
+        var distMF=State.variables.distMF;
+        
+        if (distMF[district]<5 && lockdown[district]==2){
+        	lockdown[district]=1;
+            State.variables.lockdown[district]=1;
+        }
+        if (distMF[district]<3 && lockdown[district]==1){
+        	lockdown[district]=0;
+            State.variables.lockdown[district]=0;
+        }
+        
+        if (lockdown[district]==0){
+        document.getElementById("LD").style="display:none";
+        document.getElementById("StopCurfew").style="display:none";
+        	if (distMF[district]<3){
+            document.getElementById("NoWatchCurfew").style=null;
+         document.getElementById("OrdCurfew").style="display:none";
+            document.getElementById("NoWatchLockdown").style=null;
+      document.getElementById("OrdLockdown").style="display:none";
+            }
+            else if(distMF[district]<5){
+            document.getElementById("NoWatchCurfew").style="display:none";
+            document.getElementById("OrdCurfew").style=null;
+            document.getElementById("NoWatchLockdown").style=null;
+            document.getElementById("OrdLockdown").style="display:none";
+            }
+            else{
+     document.getElementById("NoWatchCurfew").style="display:none";
+            document.getElementById("OrdCurfew").style=null;
+   document.getElementById("NoWatchLockdown").style="display:none";
+      document.getElementById("OrdLockdown").style=null;
+            }
+        }
+        
+        else if (lockdown[district]==1){
+        document.getElementById("LD").style="display:none";
+            document.getElementById("NoWatchCurfew").style="display:none";
+         document.getElementById("OrdCurfew").style="display:none";
+        document.getElementById("StopCurfew").style=null;
+        	if (distMF[district]<5){
+            document.getElementById("NoWatchLockdown").style=null;
+            document.getElementById("OrdLockdown").style="display:none";
+            }
+        	else{
+            document.getElementById("NoWatchLockdown").style="display:none";
+            document.getElementById("OrdLockdown").style=null;
+            }
+        }
+        
+        else{
+        document.getElementById("LD").style=null;
+            document.getElementById("NoWatchCurfew").style="display:none";
+         document.getElementById("OrdCurfew").style="display:none";
+        document.getElementById("StopCurfew").style="display:none";
+            document.getElementById("NoWatchLockdown").style="display:none";
+            document.getElementById("OrdLockdown").style="display:none";
+        	
+        }
+        <</script>>
+    	$mf=$mf-$distMF[$district]
+   	 <<replace "#tempMF">>$mf<</replace>>
+<</numberpool>>
+    ----
+	<h2> Plague measures </h2>
+	/*Rat hunting*/\
+    <div class="tooltip">\
+		<<if $ratHunt[$district] is 0>>\
+			[[Send rat hunters (lvl 1)|Main map][$ratHunt[$district] to 1]]
+ 		<<elseif $ratHunt[$district] is 1>>\
+ 			[[Stop the rat hunts|Main map][$ratHunt[$district] to 0]]
+			[[Send rat hunters (lvl 2)|Main map][$ratHunt[$district] to 2]]
+ 		<<elseif $ratHunt[$district] is 2>>\
+ 			[[Downgrade the rat hunts (lvl 1)|Main map][$ratHunt[$district] to 1]]
+ 			[[Send rat hunters (lvl 3)|Main map][$ratHunt[$district] to 3]]
+ 		<<else>>\
+ 			[[Downgrade the rat hunts (lvl 2)|Main map][$ratHunt[$district] to 2]]
+ 		<</if>>\
+        <span class="tooltiptext">\
+        Decreases the rat population
+       </span>\
+</div>
+		\
+/*Mask distribution*/\
+	<div class="tooltip">\
+		<<if $districtMaskDist[$district] is 0>>\
+			[[Distribute masks|Main map][$districtMaskDist[$district] to 1-$districtMaskDist[$district]]]
+		<<else>>\
+			[[Stop distributing masks|Main map][$districtMaskDist[$district] to 1-$districtMaskDist[$district]]]
+		<</if>>\
+        <span class="tooltiptext">\
+       	Decreases plague spread between humans
+        </span>\
+	</div>
+		\
+/*Elixir distribution*/\
+	<div class="tooltip">\
+		<<if $districtElDist[$district] is 0>>\
+        	<<linkreplace "Distribute elixir">>
+            	[[Distribute half doses|Main map][$districtElDist[$district] to 1]]
+				[[Distribute full doses|Main map][$districtElDist[$district] to 2]]
+                [[Distribute double doses|Main map][$districtElDist[$district] to 4]]
+            <</linkreplace>>
+		<<else>>\
+			[[Stop distributing elixir|Main map][$districtElDist[$district] to 0]]
+		<</if>>\
+        <span class="tooltiptext">\
+       	Reduces infection and death rates
+        </span>\
+</div>
+		\
+/*Lockdown*/\
+	<span id=OrdCurfew style=display:none>\
+		[[Order a curfew|Main map][$lockdown[$district] to 1]]
+	</span>\
+	<span id=NoWatchCurfew>\            
+            You need at least 3 Watch squads in the district to order a curfew.
+	</span>\
+    <span id=StopCurfew style=display:none>\
+    	[[Stop the curfew|Main map][$lockdown[$district] to 0]]
+	</span>\
+	<span id=OrdLockdown style=display:none>\			      
+            <<linkreplace "Order a lockdown">>\
+				This will cancel all trade routes coming from this district. Continue?
+            	[[Yes|Main map][$lockdown[$district] to 2; $foodRoutes[$district] to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];$elixirRoutes[$district] to [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]]
+            	[[No|Main map]]
+            <</linkreplace>>  
+	</span>\
+    <span id=NoWatchLockdown>\
+    	You need at least 5 Watch squads in the district to order a lockdown.
+	</span>\
+	<span id=LD style=display:none>\
+			[[Downgrade to a curfew|Main map][$lockdown[$district] to 1]]
+			[[Stop the lockdown|Main map][$lockdown[$district] to 0]]
+    </span>\
+		\
+		<<if $district is 4>>/*Tower district*/\
+			You can't wall off the Tower District.
+		<<else>>\
+			[[Wall off district|Main map][$wallOff[$district] to 0; $districtMoney[$district] to 0; $districtEnergy[$district] to 0]]
+		<</if>>
+----
+		<h2> Resource generation </h2>
+		Money: <<=setup.moneyProd($district)>>/turn
+		Energy: <<=setup.energyProd($district)>>/turn
+        
+		Food:
+        Production: <<=setup.foodProd($district)>>/turn
+        Consumption: -<<=setup.foodCons($district)>>/turn
+        Outgoing trade: -<<=setup.foodExp($district)>>/turn
+        Incoming trade: <<=setup.foodImp($district)>>/turn
+        Total: <<=setup.foodProd($district) - setup.foodCons($district) -setup.foodExp($district)+setup.foodImp($district)>>/turn
+        
+		Elixir:
+        Production: <<=setup.elProd($district)>>/turn
+        Consumption: -<<=setup.elCons($district)>>/turn
+        Outgoing trade: -<<=setup.elExp($district)>>/turn
+        Incoming trade: <<=setup.elImp($district)>>/turn
+        Total: <<=setup.elProd($district) - setup.elCons($district) -setup.elExp($district)+setup.elImp($district)>>/turn
+----
+		<h2> Resource stocks </h2>
+		Food Stock: $districtFoodStock[$district]
+		Elixir Stock: $districtElixirStock[$district]
+----
+		<h2>Trade routes</h2>
+<<for _i to 0; _i lt $districtName.length; _i++>>\
+ 		<<if $foodRoutes[_i][$district] is not 0>>\
+ 			$foodRoutes[_i][$district] food units from $districtName[_i]
+        <</if>>\
+ 		<<if $foodRoutes[$district][_i] is not 0>>\
+ 			$foodRoutes[$district][_i] food units to $districtName[_i]
+        <</if>>\
+ 		<<if $elixirRoutes[_i][$district] is not 0>>\
+ 			$elixirRoutes[_i][$district] elixir units from $districtName[_i]
+        <</if>>\
+ 		<<if $elixirRoutes[$district][_i] is not 0>>\
+ 			$elixirRoutes[$district][_i] elixir units to $districtName[_i]
+        <</if>>\
+<</for>>\
+----
+		<h2> Infrastructure </h2>
+		\
+		/*Sewers*/\
+		<<if $sewer[$district]==0 and $money<200>>\
+			Sewer: not enough money.
+		<<elseif $sewer[$district]==0 and $money>=200>>\
+			[[Build sewers|Main map][$sewer[$district] to 1; $money to $money-200]]
+		<<elseif $sewer[$district]==1 and $money<200>>\
+			Sewer lvl 1: lowers infection from rats a little. Not enough money to upgrade.
+		<<elseif $sewer[$district]==1 and $money>=200>>\
+			Sewer lvl 1: lowers infection from rats a little. [[Upgrade sewers|Main map][$sewer[$district] to 2; $money to $money-200]]
+		<<else>>\
+			Sewer lvl 2: lowers infection from rats a lot.
+		<</if>>\
+		\
+		/*Docks*/\
+		<<if $docks[$district]==0 and $money<200>>\
+			Build docks: not enough money.
+		<<elseif $docks[$district]==0 and $money>=200>>\
+			[[Build docks|Main map][$docks[$district] to 1; $money to $money-200; $districtFood[$district] to $districtFood[$district]+5]]
+		<<elseif $docks[$district]==1 and $money<200>>\
+			docks lvl 1: Increase food production a little. Not enough money to upgrade.
+		<<elseif $docks[$district]==1 and $money>=200>>\
+			docks lvl 1: Increase food production a little. [[Upgrade docks|Main map][$docks[$district] to 2; $money to $money-200; $districtFood[$district] to $districtFood[$district]+5]]
+		<<elseif $docks[$district]==2 and $money<200>>\
+			docks lvl 2: Increase food production. Not enough money to upgrade.
+		<<elseif $docks[$district]==2 and $money>=200>>\
+			docks lvl 2: Increases food production. [[Upgrade docks|Main map][$docks[$district] to 3; $money to $money-200; $districtFood[$district] to $districtFood[$district]+5]]
+		<<else>>\
+			Docks lvl 3: increases food production a lot.
+		<</if>>\
+		\
+        /*Warehouses*/\
+		<<if $warehouses[$district]==0 and $money<200>>\
+			warehouses: not enough money.
+		<<elseif $warehouses[$district]==0 and $money>=200>>\
+			[[Build warehouses|Main map][$warehouses[$district] to 1; $money to $money-200]]
+		<<else>>\
+			warehouses: increases storage space and reduces attacks.
+		<</if>>\
+		\
+		/*Hospital*/\
+		<<if $hospital[$district]==0 and $money<500>>\
+			hospital: not enough money.
+		<<elseif $hospital[$district]==0 and $money>=500>>\
+			[[Build hospital|Main map][$hospital[$district] to 1; $money to $money-500]]
+		<<elseif $hospital[$district]==1 and $money<500>>\
+			hospital lvl 1: lowers infection between humans a little. Not enough money to upgrade.
+		<<elseif $hospital[$district]==1 and $money>=500>>\
+			hospital lvl 1: lowers infection a little. [[Upgrade hospital|Main map][$hospital[$district] to 2; $money to $money-500]]
+		<<else>>\
+			hospital lvl 2: lowers infection a lot.
+		<</if>>\
+		\
+		/*Quarantine House*/\
+		<<if $quarantine[$district]==0 and $money<200>>\
+			quarantine house: not enough money.
+		<<elseif $quarantine[$district]==0 and $money>=200>>\
+			[[Build quarantine house|Main map][$quarantine[$district] to 1; $money to $money-200]]
+		<<else>>\
+			quarantine house: lowers infection rate between humans.
+		<</if>>\
+		\
+		/*Rails*/\
+		<<if $rail[$district]==0 and $money<300>>\
+			rail: not enough money.
+		<<elseif $rail[$district]==0 and $money>=300>>\
+			[[Build rail|Main map][$rail[$district] to 1; $money to $money-300]]
+		<<elseif $rail[$district]==1 and $money<300>>\
+			rail lvl 1: increase resource transfers.. Not enough money to upgrade.
+		<<elseif $rail[$district]==1 and $money>=300>>\
+			rail lvl 1: increase resource transfer. [[Upgrade rail|Main map][$rail[$district] to 2; $money to $money-300]]
+		<<else>>\
+			rail lvl 2: increases resource transfer a lot.
+		<</if>>\
+		\
+		/*Elixir factory*/\
+		<<if $elFact[$district]==0 and $money<500>>\
+			Build elixir factory: not enough money.
+		<<elseif $elFact[$district]==0 and $money>=500>>\
+			[[Build elixir factory|Main map][$elFact[$district] to 1; $money to $money-500; $districtElixir[$district] to $districtElixir[$district]+5]]
+		<<elseif $elFact[$district]==1 and $money<500>>\
+			elixir factory lvl 1: produces a little elixir. Not enough money to upgrade.
+		<<elseif $elFact[$district]==1 and $money>=500>>\
+			elixir factory lvl 1: produces a little elixir. [[Upgrade elixir factory|Main map][$elFact[$district] to 2; $money to $money-500; $districtElixir[$district] to $districtElixir[$district]+5]]
+		<<elseif $elFact[$district]==2 and $money<500>>\
+			elixir factory lvl 2: produces elixir. Not enough money to upgrade.
+		<<elseif $elFact[$district]==2 and $money>=500>>\
+			elixir factory lvl 2: produces elixir. [[Upgrade elFact|Main map][$elFact[$district] to 3; $money to $money-500; $districtElixir[$district] to $districtElixir[$district]+5]]
+		<<else>>\
+			Elixir factory lvl 3: produces a lot of elixir.
+		<</if>>\
+		\
+		/*Slaughterhouse*/\
+		<<if $slaught[$district]==0 and $money<400>>\
+			slaughterhouse: not enough money.
+		<<elseif $slaught[$district]==0 and $money>=400>>\
+			[[Build slaughterhouse|Main map][$slaught[$district] to 1; $money to $money-400; $districtEnergy[$district] to $districtEnergy[$district]+5]]
+		<<else>>\
+			slaughterhouse: produces whale oil.
+		<</if>>\
+        \
+		/*Watch outposts*/\
+		<<if $watchPost[$district]==0 and $money<300>>\
+			Watch outpost: not enough money.
+		<<elseif $watchPost[$district]==0 and $money>=300>>\
+			[[Build watch outpost|Main map][$watchPost[$district] to 1; $money to $money-300]]
+		<<else>>\
+			Watch Outpost: increases Watch popularity,lowers Criminal popularity.
+		<</if>>\
+	\
+	<<else>>\
+		This district has been permanently walled off.
+	<</if>>\
+    
+\
+<<script>>
+        var district=State.variables.district;
+        var lockdown=State.variables.lockdown;
+        var distMF=State.variables.distMF;
+        if (lockdown[district]==0){
+        document.getElementById("LD").style="display:none";
+        document.getElementById("StopCurfew").style="display:none";
+        	if (distMF[district]<3){
+            document.getElementById("NoWatchCurfew").style=null;
+         document.getElementById("OrdCurfew").style="display:none";
+            document.getElementById("NoWatchLockdown").style=null;
+      document.getElementById("OrdLockdown").style="display:none";
+            }
+            else if(distMF[district]<5){
+            document.getElementById("NoWatchCurfew").style="display:none";
+            document.getElementById("OrdCurfew").style=null;
+            document.getElementById("NoWatchLockdown").style=null;
+            document.getElementById("OrdLockdown").style="display:none";
+            }
+            else{
+     document.getElementById("NoWatchCurfew").style="display:none";
+            document.getElementById("OrdCurfew").style=null;
+   document.getElementById("NoWatchLockdown").style="display:none";
+      document.getElementById("OrdLockdown").style=null;
+            }
+        }
+        else if (lockdown[district]==1){
+        document.getElementById("LD").style="display:none";
+            document.getElementById("NoWatchCurfew").style="display:none";
+         document.getElementById("OrdCurfew").style="display:none";
+        document.getElementById("StopCurfew").style=null;
+        	if (distMF[district]<5){
+            document.getElementById("NoWatchLockdown").style=null;
+            document.getElementById("OrdLockdown").style="display:none";
+            }
+        	else{
+            document.getElementById("NoWatchLockdown").style="display:none";
+            document.getElementById("OrdLockdown").style=null;
+            }
+        }
+        else{
+        document.getElementById("LD").style=null;
+            document.getElementById("NoWatchCurfew").style="display:none";
+         document.getElementById("OrdCurfew").style="display:none";
+        document.getElementById("StopCurfew").style="display:none";
+            document.getElementById("NoWatchLockdown").style="display:none";
+            document.getElementById("OrdLockdown").style="display:none";
+        	
+        }
+<</script>>\
+<</if>>\
+
+
+:: StoryTradeSidebar {"position":"1125,350","size":"100,100"}
+<h1>Trade Routes</h1>
+----
+<<for _i to 0; _i lt $districtName.length; _i++>>\
+	<<for _j to 0; _j lt $districtName.length; _j++>>\
+ 		<<if $foodRoutes[_i][_j] is not 0>>\
+ 			$foodRoutes[_i][_j] food units from $districtName[_i] to $districtName[_j]  <<print "[[Delete|"+window.passageDelete()+"][$foodRoutes[" + _i + "]["+_j+"] to 0]]">>
+        <</if>>\
+ 		<<if $elixirRoutes[_i][_j] is not 0>>\
+ 			$elixirRoutes[_i][_j] elixir units from $districtName[_i] to $districtName[_j]  <<print "[[Delete|"+window.passageDelete()+"][$felixirRoutes[" + _i + "]["+_j+"] to 0]]">>
+        <</if>>\
+	<</for>>\
+<</for>>\
+----
+<<if $isTrading is 0>>\
+	[[Add routes|Trade map][window.stowRightUi2(); $isTrading to 1]]
+<<elseif $isTrading is 1>>\
+	Source District: (Select on the map)
+    
+    [[Cancel|Main map][$isTrading to 0]]
+<<elseif $isTrading is 2>>\
+	Source District: $districtName[$source]
+	Destination District: (Select on the map)
+    
+    [[Cancel|Main map][$isTrading to 0]]
+<<elseif $isTrading is 3>>\
+	Source District: $districtName[$source]
+	Destination District: $districtName[$dest]
+	Resource: [[Food|Main map][$resourceTrade to 1; $isTrading to 4]] [[Elixir|Main map][$resourceTrade to 2; $isTrading to 4]]
+    
+    [[Cancel|Main map][$isTrading to 0]]
+<<else>>\
+	Source District: $districtName[$source]
+	Destination District: $districtName[$dest]
+	Resource: <<if $resourceTrade is 1>>Food<<else>>Elixir<</if>>
+	Amount: <<numberinput "$trade" 0 0 $districtFood[$source]-setup.sumExcept($foodRoutes[$source])+$districtFoodStock[$source] autofocus>>
+    <<linkreplace 'Confirm'>>\
+       	<<if $resourceTrade is 1>>\
+           	<<if $foodRoutes[$source][$dest] is not 0>>\
+               	This will replace the current route of $foodRoutes[$source][$dest] food unit from $districtName[$source] to $districtName[$dest]. Continue?
+               	[[Yes|Main map][setup.confirmTrade()]]
+                [[No|Main map][trade to 0]]
+            <<else>>\
+               	<<script>>
+                   	setup.confirmTrade();
+                   <</script>>\
+				<<goto [[Main map]]>>\
+            <</if>>\
+        <<elseif $resourceTrade is 2>>\
+           	<<if $elixirRoutes[$source][$dest] is not 0>>\
+               	This will replace the current route of $elixirRoutes[$source][$dest] food unit from $districtName[$source] to $districtName[$dest]. Continue?
+               	[[Yes|Main map][setup.confirmTrade()]]
+                [[No|Main map][$trade to 0]]
+            <<else>>\
+               	<<script>>
+                   	setup.confirmTrade();
+                   <</script>>\
+				<<goto "Main map">>\
+            <</if>>\
+        <</if>>\
+    <</linkreplace>>\
+    
+    [[Cancel|Main map][$isTrading to 0; $trade to 0]]
+<</if>>\
+
+
+:: StoryMenu {"position":"375,250","size":"100,100"}
+<<link "Trade routes">><<script>>window.stowTradeUi()<</script>><</link>>
+
+
+:: Trade map [no-transition bbar tbar] {"position":"1300,350","size":"100,100"}
+<center>\
+<!-- Image Map Generated by http://www.image-map.net/ -->\
+<img src="media/img/map.png" usemap="#image-map">\
+\
+<map name="image-map">\
+    <area data-passage="window.passageTrade()"    onClick="window.clickTrade(0)"  title="Draper's Ward"  coords="294,326,288,308,298,281,295,264,318,247,370,206,369,191,349,171,255,189,251,153,271,96,264,59,288,48,315,25,38,24,27,39,27,493,44,485,64,443,64,396,79,361,106,363,111,352,167,338,197,314,216,361,240,360,256,318,273,318" shape="poly">\
+    <area   data-passage="window.passageTrade()"  onClick="window.clickTrade(1)"    title="Old Waterfront" coords="491,323,512,302,494,291,493,259,495,239,526,164,531,131,531,101,565,25,311,26,301,40,265,60,270,100,253,154,260,192,345,172,361,179,369,196,367,210,352,219,312,254,294,263,297,279,289,303,296,331,310,317,320,315,331,331,426,313,439,325" shape="poly">\
+    <area    data-passage="window.passageTrade()"  onClick="window.clickTrade(2)"    title="Civil Service District" coords="567,25,533,102,535,133,552,142,562,150,569,154,583,171,617,191,648,197,698,213,726,237,760,243,756,220,772,193,786,196,788,180,789,161,771,141,764,130,772,112,782,88,766,76,772,59,796,25" shape="poly">\
+	<area   data-passage="window.passageTrade()"  onClick="window.clickTrade(3)"   title="Estate District"  coords="492,322,510,302,493,287,498,236,528,159,534,136,555,144,567,153,586,170,622,192,642,194,697,214,726,237,724,252,710,257,737,325,762,336,785,341,775,387,767,364,710,372,672,381,635,379,629,393,612,395,615,373,574,372,529,352" shape="poly">\
+    <area   data-passage="window.passageTrade()"  onClick="window.clickTrade(4)"   title="Tower District" coords="777,389,786,343,755,332,736,322,709,258,727,253,726,239,759,244,758,216,771,197,787,197,789,159,828,138,836,149,941,182,952,204,984,220,967,245,986,273,1013,266,1019,275,1009,292,958,302,961,319,960,331,918,329,887,349,885,371,853,378,839,348,808,362,790,390" shape="poly">\
+    <area   data-passage="window.passageTrade()"  onClick="window.clickTrade(5)"    title="Academy District" coords="981,219,1003,210,1003,193,1023,187,1023,170,1032,154,1013,135,1029,110,1024,25,797,25,773,57,768,79,780,86,778,106,768,125,768,137,778,154,789,161,832,132,830,146,854,153,883,159,941,182,953,202" shape="poly">\
+    <area   data-passage="window.passageTrade()"  onClick="window.clickTrade(6)"   title="Legal District"  coords="1004,213,1004,192,1022,185,1023,168,1035,150,1013,135,1029,109,1024,24,1235,24,1254,37,1251,215,1236,230,1212,231,1175,218,1180,205,1148,188,1133,165,1121,166,1118,183,1104,189,1109,206,1091,235,1039,222" shape="poly">\
+    <area  data-passage="window.passageTrade()"  onClick="window.clickTrade(7)"  title="Slaughterhouse Row" coords="25,643,25,861,41,875,402,874,408,848,372,795,334,771,302,736,290,702,262,675,244,646,215,625,203,605,154,574,132,608,113,618,104,630,79,637,45,627" shape="poly">\
+    <area  data-passage="window.passageTrade()"  onClick="window.clickTrade(9)"  title="Distillery District" coords="205,605,215,626,249,649,262,677,293,705,303,736,334,771,370,794,385,811,411,789,422,755,445,726,457,716,461,678,469,644,463,604,425,552,446,505,439,451,422,427,382,427,344,431,326,418,299,435,288,448,242,432,227,467,187,456,170,479,212,503,224,523,257,527,274,522,257,553" shape="poly">\
+    <area  data-passage="window.passageTrade()"  onClick="window.clickTrade(10)"  title="Downmarket District" coords="424,431,442,456,447,505,426,555,467,607,470,651,462,684,456,719,422,754,415,790,386,814,409,845,403,875,744,874,725,738,738,732,746,709,792,699,816,687,823,658,848,645,832,645,837,623,816,587,734,579,718,529,721,468,711,458,677,467,647,468,574,448,561,460,546,443,524,426,501,441,473,421,457,422,441,436" shape="poly">\
+    <area   data-passage="window.passageTrade()"  onClick="window.clickTrade(11)"   title="Old Port District" coords="724,468,719,528,733,578,820,585,836,621,834,642,849,643,935,604,954,622,975,624,1012,614,1081,637,1098,614,1060,585,1045,559,1029,553,1011,531,1009,501,997,477,1032,455,997,447,981,462,948,462,910,483,889,472,876,482,821,468,825,499,849,513,865,547,841,531,814,521,798,502,758,491,744,467" shape="poly">
+    <area  data-passage="window.passageTrade()"  onClick="window.clickTrade(13)"  title="Rudshore Financial District" coords="1029,455,998,475,1007,499,1014,533,1026,548,1052,562,1058,583,1101,615,1054,658,992,706,1021,698,1028,769,1217,769,1219,874,1243,874,1252,848,1252,433,1183,443,1156,424,1141,430,1152,449,1131,451,1117,438,1089,429,1063,436,1043,455" shape="poly">\
+</map>\
+</center>\
+
+
+:: "+window.passageDelete()+" {"position":"1200,550","size":"100,100"}
+If this passage appears, something went wrong
+
+
+:: PassageFooter {"position":"900,550","size":"100,100"}
+<<if tags().includes("bbar")>>
+
+<div id="botbar"><div id="botblock"><div id="bottext">\
+\
+[[Factions][window.stowTradeUi(); window.stowRightUi2()]] | <<link "Trade Routes">><<script>>window.toggleTradeUI();<</script>><</link>> | [[Parliament|LawUI][window.stowTradeUi(); window.stowRightUi2()]] | [[Next turn|Main map][setup.update()]]
+<<if $turn > 500>> \
+	<<goto [[GameOver]]>> \ 
+<</if>> \
+\
+</div></div></div><</if>>
+
+
+:: Factions [faction-menu] {"position":"1050,650","size":"100,100"}
+<center>[[Exit|Main map]]</center>
+<div class="frow">\
+  <div class="fcolumn">\
+  	<h1> Dunwall Nobility </h1>
+    Popularity: $noblePop%
+    <progress @value="$noblePop" max="100"></progress> 
+    Summary: $popMessage[0]
+    
+    Characters: 
+    
+    [[More|Nobility Faction]]
+  </div>\
+  \
+  <div class="fcolumn">\
+  	<h1> The City Watch </h1>
+    Popularity: $watchPop%
+    <progress @value="$watchPop" max="100"></progress>
+    Summary: $popMessage[1]
+    
+    Characters:
+    
+    [[More|Watch Faction]]
+  </div>\
+  \
+  <div class="fcolumn">\
+  	<h1> The Abbey of the Everyman </h1>
+    Popularity: $abbeyPop%
+    <progress @value="$abbeyPop" max="100"></progress>
+    Summary: $popMessage[2]
+    
+    Characters:
+    
+    [[More|Abbey Faction]]
+  </div>\
+  \
+  <div class="fcolumn">\
+  	<h1> The People of Dunwall </h1>
+    Popularity: $commonerPop%
+    <progress @value="$commonerPop" max="100"></progress>
+    Summary: $popMessage[3]
+    
+    Characters:
+    
+    [[More|Commoner Faction]]
+  </div>\
+  \
+  <div class="fcolumn">\
+  	<h1> Dunwall Criminals </h1>
+    Popularity: $criminalPop%
+    <progress @value="$criminalPop" max="100"></progress>
+    Summary: $popMessage[4]
+    
+    Characters:
+    
+    [[More|Criminal Faction]]
+  </div>\
+</div>
+
+
+:: Nobility Faction {"position":"750,975","size":"100,100"}
+[[Back|Factions]]
+
+
+:: Watch Faction {"position":"875,1000","size":"100,100"}
+[[Back|Factions]]
+
+
+:: Abbey Faction {"position":"1000,1000","size":"100,100"}
+[[Back|Factions]]
+
+
+:: Commoner Faction {"position":"1125,1000","size":"100,100"}
+[[Back|Factions]]
+
+
+:: Criminal Faction {"position":"1250,975","size":"100,100"}
+[[Back|Factions]]
+
+
+:: Main Menu [main-menu] {"position":"675,350","size":"100,100"}
+<video id="menu-bg" autoplay muted loop>
+  <source src="media/video/menu-footage-1.mp4" type="video/mp4">
+</video>
+<div id="menu-content"> 
+<h1>Empress of the Isles</h1>
+[[New Game|Main map]]
+<<link "Load Game">><<run UI.saves();>><</link>>
+<<link "Settings">><<run UI.settings();>><</link>>
+</div>
+
+
+:: Settings Menu {"position":"575,500","size":"100,100"}
+<<button "Save/Load">><<run UI.saves()>><</button>>
+<<button "Restart">><<run UI.restart()>><</button>>
+[[Back|Main map]]
+
+
+:: LawUI [no-transition] {"position":"600,675","size":"100,100"}
+<center>[[Exit|Main map]]</center>
+----
+<h1>Parliament</h1>
+----
+<h2>Tier 1</h2>
+    <<for _i to 0; _i lt $lawName.length; _i++>>\
+    	<<if $lawTier[_i] is 1>>\
+    	<<capture _i>>\
+        	<<set _name to $lawName[_i]>>\
+        	<<set _secName to '#section'+_i>>\
+        	<<set _secName2 to 'section'+_i>>\
+    		<<capture _secName>>\
+    			<<click _name>><<toggleclass _secName "hidden">><</click>><<if $isVoted[_i]==1>> (Already voted)<</if>>
+        	<</capture>>\
+			<div sc-eval:id="_secName2" class="hidden">\
+            	$lawDesc[_i]
+                <<if $isVoted[_i] is 0>>\
+					Votes: $vote/$lawPrice[_i]
+                	<<if $vote>=$lawPrice[_i]>>\
+                       	[[Vote the law|LawUI][$isVoted[_i]=1;$vote=$vote-$lawPrice[_i]]]
+                    <</if>>\
+                    
+                <</if>></div>\
+        <</capture>>\
+        <</if>>\
+     <</for>>\
+     \
+<h2>Tier 2</h2>
+<<if $currentTier<2>> (Locked)
+Votes to unlock: $vote/200
+<<if $vote>=200>>\
+[[Expand your power|LawUI][$currentTier=2;$vote=$vote-200]]
+<</if>>\
+
+<</if>>\
+    <<for _i to 0; _i lt $lawName.length; _i++>>\
+    	<<if $lawTier[_i] is 2>>\
+    	<<capture _i>>\
+        	<<set _name to $lawName[_i]>>\
+        	<<set _secName to '#section'+_i>>\
+        	<<set _secName2 to 'section'+_i>>\
+    		<<capture _secName>>\
+    			<<click _name>><<toggleclass _secName "hidden">><</click>><<if $isVoted[_i]==1>> (Already voted)<</if>>
+        	<</capture>>\
+			<div sc-eval:id="_secName2" class="hidden">\
+            	$lawDesc[_i]
+                <<if $isVoted[_i] is 0>>\
+					Votes: $vote/$lawPrice[_i]
+                	<<if $vote>=$lawPrice[_i] && $currentTier>=2>>\
+                       	[[Vote the law|LawUI][$isVoted[_i]=1;$vote=$vote-$lawPrice[_i]]]
+                    <</if>>\
+                        
+                <</if>>\
+                </div>\
+        <</capture>>\
+        <</if>>\
+     <</for>>\
+     \
+<h2>State of Emergency</h2><<if $currentTier<3>> (Locked)<</if>>
+<<if $currentTier==2>>\
+Votes to unlock: $vote/300
+<<if $vote>=300>>\
+[[Expand your power|LawUI][$currentTier=3;$vote=$vote-300]]
+<</if>>\
+
+<</if>>\
+    <<for _i to 0; _i lt $lawName.length; _i++>>\
+    	<<if $lawTier[_i] is 3>>\
+    	<<capture _i>>\
+        	<<set _name to $lawName[_i]>>\
+        	<<set _secName to '#section'+_i>>\
+        	<<set _secName2 to 'section'+_i>>\
+    		<<capture _secName>>\
+    			<<click _name>><<toggleclass _secName "hidden">><</click>><<if $isVoted[_i]==1>> (Already voted)<</if>>
+        	<</capture>>\
+			<div sc-eval:id="_secName2" class="hidden">\
+            	$lawDesc[_i]
+                <<if $isVoted[_i] is 0>>\
+					Votes: $vote/$lawPrice[_i]
+                	<<if $vote>=$lawPrice[_i] && $currentTier>=3>>\
+                       	[[Vote the law|LawUI][$isVoted[_i]=1;$vote=$vote-$lawPrice[_i]]]
+                    <</if>>\
+                        
+                <</if>></div>\
+        <</capture>>\
+        <</if>>\
+     <</for>>\
+<h2>Martial Law</h2><<if $currentTier<4>> (Locked)<</if>>
+<<if $currentTier==3>>\
+Votes to unlock: $vote/400
+<<if $vote>=400>>\
+[[Expand your power|LawUI][$currentTier=4;$vote=$vote-400]]
+<</if>>\
+
+<</if>>\
+    <<for _i to 0; _i lt $lawName.length; _i++>>\
+    	<<if $lawTier[_i] is 4>>\
+    	<<capture _i>>\
+        	<<set _name to $lawName[_i]>>\
+        	<<set _secName to '#section'+_i>>\
+        	<<set _secName2 to 'section'+_i>>\
+    		<<capture _secName>>\
+    			<<click _name>><<toggleclass _secName "hidden">><</click>><<if $isVoted[_i]==1>> (Already voted)<</if>>
+        	<</capture>>\
+			<div sc-eval:id="_secName2" class="hidden">\
+            	$lawDesc[_i]
+                <<if $isVoted[_i] is 0>>\
+					Votes: $vote/$lawPrice[_i]
+                	<<if $vote>=$lawPrice[_i] && $currentTier>=4>>\
+                       	[[Vote the law|LawUI][$isVoted[_i]=1;$vote=$vote-$lawPrice[_i]]]
+                    <</if>>\
+                        
+                <</if>></div>\
+        <</capture>>\
+        <</if>>\
+     <</for>>\
+
+

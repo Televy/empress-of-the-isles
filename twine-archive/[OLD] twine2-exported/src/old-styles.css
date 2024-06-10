@@ -1,0 +1,467 @@
+/* Font Imports ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Serif&display=swap');
+
+/* Default Styling ============================================= */
+body {
+    background-color: #151515;
+    color: white;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+h1, h2 {
+	font-family: 'Noto Serif', serif;
+}
+
+
+/* Collapsible Text Styling ==================================== */
+
+.hidden {
+	display: none;
+}
+
+/* Start Menu Styling ========================================== */
+#menu-content {
+	color: navy;
+    position: fixed;
+    top: 20px;
+}
+
+#menu-bg  {
+    position: fixed;
+  	object-fit: cover;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+.passage.main-menu a {
+	color: navy;
+}
+
+.passage.main-menu a:hover {
+	color: green;
+}
+
+/* Link Styling ================================================ */
+a {
+	color: gold;
+}
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Tooltip Text Styling ======================================== */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+ 
+  /* Positioning & size of the tooltip */
+  position: absolute;
+  z-index: 100;
+  width: 450px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -225px; /*half of width*/
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+  
+/* Top Bar Styling ============================================= */
+#topbar {
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background-color: #003763;
+	border-bottom: 3px solid #9c863c;
+	box-shadow: 0 0 10px 0 #333;
+	z-index: 100;
+}
+
+#topresources img {
+	max-width: 5%;
+  	max-height: auto;
+}
+
+#topresources {
+    margin-left: 1em; 
+  	color: #fffade; 
+}
+
+#topturns {
+  	text-align: right;
+    margin-right: 1em;
+  	color: #fffade; 
+}
+
+#ui-bar.stowed~#story {
+	margin-left: 4.5em;
+}
+
+@media screen and (max-width: 1136px) {
+	#topblock {
+		margin-left: 19em;
+		margin-right: 1.5em;
+	}
+	#ui-bar.stowed~#story #topblock {
+		margin-left: 3.5em;
+	}
+}
+@media screen and (max-width: 768px) {
+	#topblock {
+		margin-left: 3.5em;
+	}
+}
+
+/* Bottom Bar Styling ========================================== */
+#botbar {
+  	text-align: center;
+  	color: #fffade;
+
+	position: fixed;
+ 	left: 25%;
+	bottom: 0;
+	width: 50%;
+	background-color: #003763;
+	border-top: 1px solid #444;
+	box-shadow: 0 0 10px 0 #333;
+	z-index: 100;
+}
+
+/* Right UI Bar Styling ======================================== */
+#right-ui-bar {
+	background-color: #003763;
+	border-right: 1px solid #444;
+	text-align: center;
+  
+  	/* Layout and Positioning */
+  	position: fixed;
+	z-index: 50;
+	bottom: 5px;
+	right: 0;
+	width: 30%;
+	height: 93%; /* so menu doesn't clip over top bar info*/
+	margin: 0;
+	padding: 0;
+	-webkit-transition: right .2s ease-in;
+	-o-transition: right .2s ease-in;
+	transition: right .2s ease-in;
+}
+#right-ui-bar-toggle {
+	font-size: 1.2em;
+	line-height: inherit;
+	color: #eee;
+	background-color: transparent;
+	border: 1px solid #444;
+}
+#right-ui-bar-toggle:before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+
+#right-ui-bar-tray {
+	position: absolute;
+	top: .2em;
+	left: 0;
+	right: 0;
+}
+#right-ui-bar-toggle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: none;
+	padding: .3em .45em .25em;
+	-webkit-user-select: none;
+}
+#right-ui-bar-toggle:before {
+	content: "\e822"; /*Code for arrow icon in fontawesome*/
+}
+#right-ui-bar-body {
+	height: 90%;
+	height: calc(100% - 2.5em);
+	margin: 2.5em 0;
+	padding: 0 1.5em;
+  	line-height: 1.5;
+	overflow: auto;
+}
+
+#story {
+	margin-right: 20em;
+}
+
+/* Stowing of the Right UI Bar. */
+#right-ui-bar.stowed {
+	right: -30%; 
+}
+
+#right-ui-bar.stowed~#story {
+	margin-right: 4.5em;
+}
+
+
+/* Trading Menu Styling ======================================== */
+#trade-ui-bar {
+	background-color: #003763;
+	border-right: 1px solid #444;
+	text-align: center;
+  
+  	/* Layout and Positioning */
+  	position: fixed;
+	z-index: 60;
+	bottom: 5px;
+	left: 0;
+	width: 30%;
+	height: 93%;
+	margin: 0;
+	padding: 0;
+	-webkit-transition: left .2s ease-in;
+	-o-transition: left .2s ease-in;
+	transition: left .2s ease-in;
+}
+
+#trade-ui-bar-toggle {
+	font-size: 1.2em;
+	line-height: inherit;
+	color: #eee;
+	background-color: transparent;
+	border: 1px solid #444;
+}
+
+#trade-ui-bar-toggle:before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+
+#trade-ui-bar-tray {
+	position: absolute;
+	top: .2em;
+	left: 0;
+	right: 0;
+}
+#trade-ui-bar-toggle {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-right: none;
+	padding: .3em .45em .25em;
+	-webkit-user-select: none;
+}
+
+#trade-ui-bar-toggle:before {
+	content: "\e821"; /*Code for arrow icon in fontawesome*/
+}
+
+#trade-ui-bar-body {
+	height: 90%;
+	height: calc(100% - 2.5em);
+	margin: 2.5em 0;
+	padding: 0 1.5em;
+  	line-height: 1.5;
+	overflow: auto;
+}
+
+#story {
+	margin-right: 20em;
+}
+
+/* Stowing of the Right UI Bar. */
+#trade-ui-bar.stowed {
+	left: -30%; 
+}
+
+#trade-ui-bar.stowed~#story {
+	margin-left: 4.5em;
+}
+
+/* Factions Menu Styling ======================================= */
+
+body.faction-menu {
+	background-color: #003763;
+}
+
+.fcolumn {
+	float: left;
+  	width: 20%;
+}
+
+.frow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+progress{  
+  	background-color: white; 
+}  
+
+progress[value] {
+	color: blue;
+}
+
+/* Built-In Twine Styling ====================================== */
+
+/*transitions*/
+.no-transition.passage-in {
+	opacity: 1;
+}
+
+/*passage width*/
+#passages {
+	max-width: 100%; /* default is 54em */
+}
+
+/*UI bar*/
+#ui-bar{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20em;
+  height: 93%; /* so menu doesn't clip over top bar info*/
+  margin: 0;
+  padding: 0;
+}
+#ui-bar.stowed{left: -18em;}
+#ui-bar-history{display: none;}
+#title{display: none;}
+
+/*! <<numberpool>> macro set for SugarCube v2 */
+div[id|="numberinput-body"] {
+	display: inline-block;
+}
+div[id|="numberinput-body"] input {
+	min-width: 3em;
+	width: 3em;
+	text-align: center;
+}
+div[id|="numberinput-body"] button {
+	font-family: "tme-fa-icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: normal;
+	speak: none;
+	padding: 0.4em 0.6em;
+}
+div[id|="numberinput-body"] button[id|="numberinput-minus"] {
+	margin-right: 0.4em;
+}
+div[id|="numberinput-body"] button[id|="numberinput-plus"] {
+	margin-left: 0.4em;
+}
+
+div[id|="numberslider-body"] {
+	display: inline-block;
+}
+div[id|="numberslider-body"] span {
+	display: inline-block;
+	/*font-size: 1.25em;*/
+	margin-left: 0.25em;
+	min-width: 3em;
+	text-align: center;
+	vertical-align: middle;
+}
+div[id|="numberslider-body"] input {
+	-webkit-appearance: none;
+	cursor: pointer;
+	height: 1.25em;
+	min-width: 20em;
+	vertical-align: middle;
+}
+div[id|="numberslider-body"] input:focus {
+	outline: none;
+}
+div[id|="numberslider-body"] input::-webkit-slider-runnable-track {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+	cursor: pointer;
+	height: 10px;
+	width: 100%;
+}
+div[id|="numberslider-body"] input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background: #35a;
+	border: 1px solid #57c;
+	border-radius: 0;
+	cursor: pointer;
+	height: 18px;
+	margin-top: -5px;
+	width: 33px;
+}
+div[id|="numberslider-body"] input:focus::-webkit-slider-runnable-track {
+	background: #222;
+}
+div[id|="numberslider-body"] input::-moz-range-track {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+	cursor: pointer;
+	height: 10px;
+	width: 100%;
+}
+div[id|="numberslider-body"] input::-moz-range-thumb {
+	background: #35a;
+	border: 1px solid #57c;
+	border-radius: 0;
+	cursor: pointer;
+	height: 18px;
+	width: 33px;
+}
+div[id|="numberslider-body"] input::-ms-track {
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+	cursor: pointer;
+	height: 10px;
+	width: 99%; /* fallback for MS browsers without support for calc() */
+	width: calc(100% - 1px);
+}
+div[id|="numberslider-body"] input::-ms-fill-lower {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+}
+div[id|="numberslider-body"] input::-ms-fill-upper {
+	background: #222;
+	border: 1px solid #444;
+	border-radius: 0;
+}
+div[id|="numberslider-body"] input::-ms-thumb {
+	background: #35a;
+	border: 1px solid #57c;
+	border-radius: 0;
+	cursor: pointer;
+	height: 16px;
+	width: 33px;
+}

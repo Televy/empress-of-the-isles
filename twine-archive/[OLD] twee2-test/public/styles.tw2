@@ -1,0 +1,40 @@
+:: EOTI Stylesheet [stylesheet]
+
+/* Font Imports ================================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Noto+Serif&display=swap');
+
+body {
+	background: blue;
+	margin: 0;
+}
+
+main {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 10px;
+	background: green;
+}
+
+#passages {
+	border: solid 10px red;
+	margin: auto;
+}
+
+.passage {
+	line-height: 1;
+}
+
+img, map {
+	margin: auto;
+	display: block;
+	width: 90%
+}
+
+.menu-activated {
+	background: purple;
+}
