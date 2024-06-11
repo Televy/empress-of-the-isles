@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c70pwcs7tdxon"]
+
+[ext_resource type="Script" path="res://eoti/district.gd" id="1_dhs67"]
+
+[resource]
+resource_name = "Test"
+script = ExtResource("1_dhs67")

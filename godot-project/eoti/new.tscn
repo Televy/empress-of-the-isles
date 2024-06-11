@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cxd3ircmt4ylh"]
-
-[node name="Node" type="Node"]
-
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "New scene!"

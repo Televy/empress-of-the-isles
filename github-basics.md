@@ -18,7 +18,7 @@ This will be split into two sections: Sections you can do by yourself, and secti
     - Open up the Command Palette in VS Code with either `Ctrl + Shift + P` or View > Command Palette in the top left. 
     - Search "terminal" and find "**Terminal:** Select Default Profile." Then, select Git Bash. **There are no differences in commands/code used if you use PowerShell over Git Bash.**
 
-## When I (Custy) Am Awake
+## When I (Tivs) Am Awake
 5. Still in the VS Code terminal, navigate to the folder where you want to keep the EOTI repository.   
 **Terminal directory basics:**
     - Your current directory is displayed in the terminal after `MINGW64` as `~/Documents` or whatnot.

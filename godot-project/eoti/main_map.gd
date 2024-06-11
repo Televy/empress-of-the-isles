@@ -1,6 +1,5 @@
 extends Control
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -11,10 +10,8 @@ func _process(delta):
 	pass
 
 
-func _on_button_pressed():
-	print("Button pressed!")
-
-
-func _on_butts_pressed():
-	print("ass pressed")
-	get_tree().change_scene_to_file("res://eoti/new.tscn")
+func _on_tower_district_pressed():
+	print("Going to: The Tower District!")
+	get_tree().change_scene_to_file("res://eoti/tower_district.tscn")
+	
+	

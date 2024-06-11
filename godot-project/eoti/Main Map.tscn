@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck2qepek88uoj"]
+
+[ext_resource type="Script" path="res://eoti/main_map.gd" id="1_rxshl"]
+
+[node name="Node" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_rxshl")
+
+[node name="Tower_District" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 108.0
+offset_right = 328.0
+offset_bottom = 176.0
+text = "Tower District"
+
+[connection signal="pressed" from="Control/Tower_District" to="Control" method="_on_tower_district_pressed"]
